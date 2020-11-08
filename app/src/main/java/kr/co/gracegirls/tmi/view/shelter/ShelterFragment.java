@@ -1,4 +1,4 @@
-package kr.co.gracegirls.myapplication.view.shelter;
+package kr.co.gracegirls.tmi.view.shelter;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import kr.co.gracegirls.myapplication.R;
+import kr.co.gracegirls.tmi.R;
 
 public class ShelterFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package kr.co.gracegirls.myapplication.view.mypage;
+package kr.co.gracegirls.tmi.view.mypage;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import kr.co.gracegirls.myapplication.R;
+import kr.co.gracegirls.tmi.R;
 
 public class MyPageFragment extends Fragment {
 
