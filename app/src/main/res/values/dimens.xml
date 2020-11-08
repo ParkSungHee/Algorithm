@@ -6,6 +6,16 @@
 
     <dimen name="common_elevation_5dp">5dp</dimen>
 
+    <dimen name="common_margin_1dp">1dp</dimen>
+    <dimen name="common_margin_2dp">2dp</dimen>
+    <dimen name="common_margin_3dp">3dp</dimen>
+    <dimen name="common_margin_4dp">4dp</dimen>
+    <dimen name="common_margin_5dp">5dp</dimen>
+    <dimen name="common_margin_6dp">6dp</dimen>
+    <dimen name="common_margin_7dp">7dp</dimen>
+    <dimen name="common_margin_8dp">8dp</dimen>
+    <dimen name="common_margin_9dp">9dp</dimen>
+    <dimen name="common_margin_10dp">10dp</dimen>
     <dimen name="common_margin_11dp">11dp</dimen>
     <dimen name="common_margin_12dp">12dp</dimen>
     <dimen name="common_margin_13dp">13dp</dimen>
