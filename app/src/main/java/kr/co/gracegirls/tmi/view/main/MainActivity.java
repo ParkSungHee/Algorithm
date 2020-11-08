@@ -1,29 +1,165 @@
 package kr.co.gracegirls.tmi.view.main;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.view.home.HomeFragment;
+import kr.co.gracegirls.tmi.view.mypage.MyPageFragment;
+import kr.co.gracegirls.tmi.view.record.RecordFragment;
+import kr.co.gracegirls.tmi.view.shelter.ShelterFragment;
+import kr.co.gracegirls.tmi.view.sos.SosFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FragmentManager fragmentManager;
+    private HomeFragment homeFragment = new HomeFragment();
+    private RecordFragment recordFragment = new RecordFragment();
+    private SosFragment sosFragment = new SosFragment();
+    private ShelterFragment shelterFragment = new ShelterFragment();
+    private MyPageFragment myPageFragment = new MyPageFragment();
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.home, R.id.record, R.id.sos)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(navView, navController);
+
+
+        bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+
+        fragmentManager = getSupportFragmentManager();
+        homeFragment = new HomeFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout, homeFragment).commit();
+    }
+
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.home:
+                    if (homeFragment == null) {
+                        homeFragment = new HomeFragment();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, homeFragment).commit();
+                    }
+                    if (homeFragment != null) {
+                        fragmentManager.beginTransaction().show(homeFragment).commit();
+                    }
+                    if (recordFragment != null) {
+                        fragmentManager.beginTransaction().hide(recordFragment).commit();
+                    }
+                    if (sosFragment != null) {
+                        fragmentManager.beginTransaction().hide(sosFragment).commit();
+                    }
+                    if (shelterFragment != null) {
+                        fragmentManager.beginTransaction().hide(shelterFragment).commit();
+                    }
+                    if (myPageFragment != null) {
+                        fragmentManager.beginTransaction().hide(myPageFragment).commit();
+                    }
+                    break;
+                case R.id.record:
+                    if (recordFragment == null) {
+                        recordFragment = new RecordFragment();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, recordFragment).commit();
+                    }
+                    if (homeFragment != null) {
+                        fragmentManager.beginTransaction().hide(homeFragment).commit();
+                    }
+                    if (recordFragment != null) {
+                        fragmentManager.beginTransaction().show(recordFragment).commit();
+                    }
+                    if (sosFragment != null) {
+                        fragmentManager.beginTransaction().hide(sosFragment).commit();
+                    }
+                    if (shelterFragment != null) {
+                        fragmentManager.beginTransaction().hide(shelterFragment).commit();
+                    }
+                    if (myPageFragment != null) {
+                        fragmentManager.beginTransaction().hide(myPageFragment).commit();
+                    }
+                    break;
+                case R.id.sos:
+                    if (sosFragment == null) {
+                        sosFragment = new SosFragment();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, sosFragment).commit();
+                    }
+                    if (homeFragment != null) {
+                        fragmentManager.beginTransaction().hide(homeFragment).commit();
+                    }
+                    if (recordFragment != null) {
+                        fragmentManager.beginTransaction().hide(recordFragment).commit();
+                    }
+                    if (sosFragment != null) {
+                        fragmentManager.beginTransaction().show(sosFragment).commit();
+                    }
+                    if (shelterFragment != null) {
+                        fragmentManager.beginTransaction().hide(shelterFragment).commit();
+                    }
+                    if (myPageFragment != null) {
+                        fragmentManager.beginTransaction().hide(myPageFragment).commit();
+                    }
+                    break;
+                case R.id.shelter:
+                    if (shelterFragment == null) {
+                        shelterFragment = new ShelterFragment();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, shelterFragment).commit();
+                    }
+                    if (homeFragment != null) {
+                        fragmentManager.beginTransaction().hide(homeFragment).commit();
+                    }
+                    if (recordFragment != null) {
+                        fragmentManager.beginTransaction().hide(recordFragment).commit();
+                    }
+                    if (sosFragment != null) {
+                        fragmentManager.beginTransaction().hide(sosFragment).commit();
+                    }
+                    if (shelterFragment != null) {
+                        fragmentManager.beginTransaction().show(shelterFragment).commit();
+                    }
+                    if (myPageFragment != null) {
+                        fragmentManager.beginTransaction().hide(myPageFragment).commit();
+                    }
+                    break;
+                case R.id.myPage:
+                    if (myPageFragment == null) {
+                        myPageFragment = new MyPageFragment();
+                        fragmentManager.beginTransaction().add(R.id.frameLayout, myPageFragment).commit();
+                    }
+                    if (homeFragment != null) {
+                        fragmentManager.beginTransaction().hide(homeFragment).commit();
+                    }
+                    if (recordFragment != null) {
+                        fragmentManager.beginTransaction().hide(recordFragment).commit();
+                    }
+                    if (sosFragment != null) {
+                        fragmentManager.beginTransaction().hide(sosFragment).commit();
+                    }
+                    if (shelterFragment != null) {
+                        fragmentManager.beginTransaction().hide(shelterFragment).commit();
+                    }
+                    if (myPageFragment != null) {
+                        fragmentManager.beginTransaction().show(myPageFragment).commit();
+                    }
+                    break;
+
+
+            }
+            return true;
+        }
     }
 
 }
