@@ -1,4 +1,4 @@
-package kr.co.gracegirls.myapplication.view.main;
+package kr.co.gracegirls.tmi.view.main;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import kr.co.gracegirls.myapplication.R;
+import kr.co.gracegirls.tmi.R;
 
 public class MainActivity extends AppCompatActivity {
 

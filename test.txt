@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 ㅎㅇㅎㅇ
+=======
+ hello i am sehee
+
+>>>>>>> master

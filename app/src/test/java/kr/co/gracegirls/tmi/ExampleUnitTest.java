@@ -1,4 +1,4 @@
-package kr.co.gracegirls.myapplication;
+package kr.co.gracegirls.tmi;
 
 import org.junit.Test;
 

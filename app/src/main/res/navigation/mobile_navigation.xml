@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="kr.co.gracegirls.myapplication.view.home.HomeFragment"
+        android:name="kr.co.gracegirls.tmi.view.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/record"
-        android:name="kr.co.gracegirls.myapplication.view.record.RecordFragment"
+        android:name="kr.co.gracegirls.tmi.view.record.RecordFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_record" />
 
     <fragment
         android:id="@+id/sos"
-        android:name="kr.co.gracegirls.myapplication.view.sos.SosFragment"
+        android:name="kr.co.gracegirls.tmi.view.sos.SosFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_sos" />
 </navigation>
