@@ -18,51 +18,149 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/login_content_box"
+    <ImageView
+        android:id="@+id/tmp_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/common_margin_20dp"
+        android:src="@drawable/icon_tmp_person"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_title_bar"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="사용자이름\n(뱃지명)(뱃지사진)"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/common_margin_20dp"
+        app:layout_constraintStart_toEndOf="@id/tmp_profile"
+        app:layout_constraintTop_toTopOf="@id/tmp_profile" />
+
+    <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:background="#707070"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_title_bar"
-        app:layout_constraintVertical_weight="1">
+        app:layout_constraintTop_toBottomOf="@id/tmp_profile" />
 
-        <EditText
-            android:id="@+id/email_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="@dimen/common_margin_13dp"
-            android:background="@null"
-            android:hint="Email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/login_content_box"
-            app:layout_constraintStart_toEndOf="@id/login_content_box"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/pswd_input"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="비밀번호"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/my_record_button"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:id="@+id/content_box1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="300dp"
-        android:background="@null"
-        android:text="로그인"
+        android:layout_marginTop="@dimen/common_margin_5dp"
+        android:layout_marginBottom="@dimen/common_margin_5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view1">
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0.00Km\n거리" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00\n시간" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0000\n걸음" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0000\n횟수" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:background="#707070"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content_box1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="fill_vertical"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.603" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        tools:ignore="UselessLeaf">
 
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="나의 TMI"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="나의 뱃지"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="프로필 수정"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="계정설정\n회원 탈퇴\n로그아웃"
+            android:textAlignment="viewStart"
+            android:textSize="14dp" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="앱 설정\n알림 설정\n공지사항\n문의사항"
+            android:textAlignment="viewStart"
+            android:textSize="14dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
