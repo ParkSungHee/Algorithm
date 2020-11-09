@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".view.main.SplashScreenActivity"
+        <activity android:name=".view.common.SplashScreenActivity"
             android:theme="@style/SplashTheme">
 
             <intent-filter>
@@ -22,7 +22,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="kr.co.gracegirls.tmi.view.main.MainActivity" />
+        <activity android:name="kr.co.gracegirls.tmi.view.common.MainActivity" />
     </application>
 
 </manifest>

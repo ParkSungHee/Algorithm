@@ -1,4 +1,4 @@
-package kr.co.gracegirls.tmi.view.main;
+package kr.co.gracegirls.tmi.view.common;
 
 import android.content.Intent;
 import android.os.Bundle;

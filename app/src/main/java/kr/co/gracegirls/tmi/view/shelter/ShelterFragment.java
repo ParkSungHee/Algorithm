@@ -9,12 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.module.TitleBar;
 
 public class ShelterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shelter, container, false);
+        View view = inflater.inflate(R.layout.fragment_shelter, container, false);
+
+        TitleBar titleBar = view.findViewById(R.id.shelter_title_bar);
+        titleBar.init("대피소 현황", false);
+
+        return view;
     }
 }

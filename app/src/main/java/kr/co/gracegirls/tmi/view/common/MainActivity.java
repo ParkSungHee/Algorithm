@@ -1,4 +1,4 @@
-package kr.co.gracegirls.tmi.view.main;
+package kr.co.gracegirls.tmi.view.common;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.co.gracegirls.tmi.R;
@@ -21,11 +20,11 @@ import kr.co.gracegirls.tmi.view.sos.SosFragment;
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
-    private HomeFragment homeFragment = new HomeFragment();
-    private RecordFragment recordFragment = new RecordFragment();
-    private SosFragment sosFragment = new SosFragment();
-    private ShelterFragment shelterFragment = new ShelterFragment();
-    private MyPageFragment myPageFragment = new MyPageFragment();
+    private HomeFragment homeFragment;
+    private RecordFragment recordFragment;
+    private SosFragment sosFragment;
+    private ShelterFragment shelterFragment;
+    private MyPageFragment myPageFragment;
     private BottomNavigationView bottomNavigationView;
 
     @Override
