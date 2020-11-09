@@ -70,16 +70,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/temp_shelter_img"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_17dp"
-        android:src="@drawable/tmp_shelter"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/shelter_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_content_box"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/search_content_box" />
 
     <TextView
         android:id="@+id/list_title"
@@ -90,7 +90,7 @@
         android:text="@string/list_shelter_text"
         android:textAlignment="textStart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temp_shelter_img" />
+        app:layout_constraintTop_toBottomOf="@id/shelter_map" />
 
     <TextView
         android:id="@+id/list_title_hint"

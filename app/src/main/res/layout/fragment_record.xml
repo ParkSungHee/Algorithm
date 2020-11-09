@@ -18,14 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/temp_map_img"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/record_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/temp_map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shelter_title_bar" />
 
@@ -37,7 +37,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temp_map_img">
+        app:layout_constraintTop_toBottomOf="@id/record_map">
 
 
         <TextView
@@ -104,6 +104,8 @@
         android:src="@drawable/icon_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/box2"
+        app:layout_constraintVertical_bias="0.993" />
 </androidx.constraintlayout.widget.ConstraintLayout>
