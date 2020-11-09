@@ -55,7 +55,7 @@
             android:id="@+id/lat_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/current_location_lat"
+            android:text="@string/current_location_lng"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="100dp" />

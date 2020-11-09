@@ -16,4 +16,5 @@
     <string name="address">주소\n주소</string>
     <string name="current_location_lat">위도</string>
     <string name="current_location_lng">경도</string>
+    <string name="moutain_name">산이름</string>
 </resources>
