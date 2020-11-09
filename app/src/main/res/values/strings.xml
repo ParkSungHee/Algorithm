@@ -14,4 +14,10 @@
     <string name="mountain_name_temp">아차산</string>
     <string name="risk_title">오늘의 산악사고 위험지수</string>
     <string name="address">주소\n주소</string>
+    <string name="current_location_lat">위도</string>
+    <string name="current_location_lng">경도</string>
+    <string name="moutain_name">산이름</string>
+    <string name="list_shelter_text">대피소 목록</string>
+    <string name="list_shelter_hint">(선택한 산에 있는 대피소 목록)</string>
+    <string name="shelter_name_temp">양폭 대피소</string>
 </resources>

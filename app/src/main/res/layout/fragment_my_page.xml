@@ -1,14 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/common_margin_15dp"
+    android:paddingEnd="@dimen/common_margin_15dp"
     tools:context=".view.mypage.MyPageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <kr.co.gracegirls.tmi.module.TitleBar
+        android:id="@+id/mypage_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_17dp"
+        android:layout_marginBottom="@dimen/common_margin_11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/tmp_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/common_margin_20dp"
+        android:src="@drawable/icon_tmp_person"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_title_bar"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="사용자이름\n(뱃지명)(뱃지사진)"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/common_margin_20dp"
+        app:layout_constraintStart_toEndOf="@id/tmp_profile"
+        app:layout_constraintTop_toTopOf="@id/tmp_profile" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:background="#707070"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tmp_profile" />
+
+    <LinearLayout
+        android:id="@+id/content_box1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_5dp"
+        android:layout_marginBottom="@dimen/common_margin_5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view1">
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0.00Km\n거리" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00\n시간" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0000\n걸음" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0000\n횟수" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:background="#707070"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content_box1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="fill_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        tools:ignore="UselessLeaf">
+
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="나의 TMI"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="나의 뱃지"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="프로필 수정"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="계정설정\n회원 탈퇴\n로그아웃"
+            android:textAlignment="viewStart"
+            android:textSize="14dp" />
+
+        <TextView
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="10dp"
+            android:text="앱 설정\n알림 설정\n공지사항\n문의사항"
+            android:textAlignment="viewStart"
+            android:textSize="14dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

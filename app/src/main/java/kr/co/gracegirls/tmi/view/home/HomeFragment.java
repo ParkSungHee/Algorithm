@@ -1,16 +1,12 @@
 package kr.co.gracegirls.tmi.view.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,7 +26,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        TitleBar titleBar = view.findViewById(R.id.home_title_bar);
+        TitleBar titleBar = view.findViewById(R.id.shelter_title_bar);
 
         titleBar.init(getString(R.string.appName), false);
         recyclerView = view.findViewById(R.id.mountain_list);
