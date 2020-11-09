@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_margin_15dp"
-        android:paddingEnd="@dimen/common_margin_15dp"
-        tools:context=".view.shelter.ShelterFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/common_margin_15dp"
+    android:paddingEnd="@dimen/common_margin_15dp"
+    tools:context=".view.shelter.ShelterFragment">
 
     <kr.co.gracegirls.tmi.module.TitleBar
         android:id="@+id/shelter_title_bar"
@@ -48,7 +48,7 @@
             android:layout_marginTop="@dimen/common_margin_13dp"
             android:layout_marginBottom="@dimen/common_margin_13dp"
             android:background="@null"
-            android:hint="@string/search_hint"
+            android:hint="산이름"
             android:textAlignment="textStart"
             android:textSize="@dimen/common_margin_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,6 +69,7 @@
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/temp_shelter_img"
         android:layout_width="0dp"
@@ -79,6 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_content_box"
         tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/list_title"
         style="@style/CommonText.Black"
@@ -112,10 +114,10 @@
         app:layout_constraintTop_toBottomOf="@id/list_title">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mountain_list"
+            android:id="@+id/shelter_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_mountain_list" />
+            tools:listitem="@layout/item_shelter_list" />
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
