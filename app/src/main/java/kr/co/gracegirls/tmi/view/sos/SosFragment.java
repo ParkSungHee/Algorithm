@@ -9,11 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.module.TitleBar;
 
 public class SosFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sos, container, false);
+        View view = inflater.inflate(R.layout.fragment_sos, container, false);
+
+        TitleBar titleBar = view.findViewById(R.id.sos_title_bar);
+        titleBar.init("자동 구조 요청", false);
+
+        return view;
     }
 }
