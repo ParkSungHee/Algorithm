@@ -29,73 +29,95 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shelter_title_bar" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mountain_content_box"
+    <LinearLayout
+        android:id="@+id/box1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/background_green_line_radius_8dp"
+        android:layout_marginTop="@dimen/common_margin_20dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp_map_img">
+        app:layout_constraintTop_toBottomOf="@id/temp_map_img">
+
 
         <TextView
-            android:id="@+id/mountain_name_view"
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/moutain_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/sos_content_box"
-        tools:layout_editor_absoluteX="13dp">
+            android:layout_weight="1"
+            android:text="0.00\n킬로미터" />
 
         <TextView
-            android:id="@+id/moutain_record_inf"
-            android:layout_width="67dp"
-            android:layout_height="74dp"
-            android:text="이동 거리\n이동 시간\n평균 속도\n총 획득고도"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sos_content_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/mountain_content_box"
-        tools:layout_editor_absoluteX="19dp">
-
-        <TextView
-            android:id="@+id/lng_text_view"
+            style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/current_location_lat"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="100dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_weight="1"
+            android:text="000\n걸음수" />
 
-    <Button
-        android:id="@+id/my_record_button"
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00\n시간" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/box2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/box1">
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0\n칼로리" />
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0m\n고도" />
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="---\nBPM" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
         android:background="@null"
-        android:src="@drawable/icon_search"
-        android:text="나의 산행 기록"
+        android:src="@drawable/icon_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.603" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/box2"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/icon_pause"
+        app:layout_constraintBottom_toBottomOf="@id/startButton"
+        app:layout_constraintEnd_toStartOf="@id/startButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/startButton"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

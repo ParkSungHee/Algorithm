@@ -18,7 +18,7 @@ public class RecordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_record, container, false);
 
         TitleBar titleBar = view.findViewById(R.id.shelter_title_bar);
-        titleBar.init("TMI", false);
+        titleBar.init("기록", false);
 
         return view;
     }
