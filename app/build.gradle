@@ -9,7 +9,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "kr.co.gracegirls.myapplication"
+        applicationId "kr.co.gracegirls.tmi"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
