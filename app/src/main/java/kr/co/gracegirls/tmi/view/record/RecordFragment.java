@@ -22,7 +22,7 @@ import kr.co.gracegirls.tmi.module.TitleBar;
 
 
 public class RecordFragment extends Fragment implements OnMapReadyCallback {
-    private GoogleMap mMap;
+    private GoogleMap googleMap;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,16 +41,16 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        this.googleMap = googleMap;
 
         final LatLng center = new LatLng(35.1434021, 126.7988363);
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(center).zoom(15).build();
-        mMap.moveCamera(CameraUpdateFactory
+        this.googleMap.moveCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
 
-        Marker marker = mMap.addMarker(new MarkerOptions()
+        Marker marker = this.googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(35.1434021, 126.7988363))
                 .title("광주소프트웨어마이스터고등학교"));
     }
