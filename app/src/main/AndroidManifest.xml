@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.co.gracegirls.tmi">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,11 +21,12 @@
             android:required="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDjcxJPJa8jPTF5Zljbg2c0jqQ1YpfjDGs"
-            >
+            android:value="AIzaSyDjcxJPJa8jPTF5Zljbg2c0jqQ1YpfjDGs">
 
         </meta-data>
-        <activity android:name=".view.common.SplashScreenActivity"
+
+        <activity
+            android:name=".view.common.SplashScreenActivity"
             android:theme="@style/SplashTheme">
 
             <intent-filter>
