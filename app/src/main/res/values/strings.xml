@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MOUNTAIN</string>
+    <string name="app_name">TMI</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
