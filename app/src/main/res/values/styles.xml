@@ -26,6 +26,16 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
+    <style name="CommonText.Gray">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">#95989a</item>
+        <item name="hintTextColor">#95989a</item>
+    </style>
+
+    <style name="CommonText.White">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
     <style name="ButtonColor">
         <item name="color">#00c73c</item>
     </style>
