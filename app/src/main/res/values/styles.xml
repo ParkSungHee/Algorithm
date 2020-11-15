@@ -32,6 +32,10 @@
         <item name="hintTextColor">#95989a</item>
     </style>
 
+    <style name="CommonText.White">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
     <style name="ButtonColor">
         <item name="color">#00c73c</item>
     </style>

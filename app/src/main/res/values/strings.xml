@@ -23,4 +23,8 @@
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
     <string name="login">로그인</string>
+    <string name="withoutLogin">로그인 없이 사용하기</string>
+    <string name="firstTime">처음 방문하셨나요?</string>
+    <string name="signUp">회원가입</string>
+    <string name="googleLogin">구글 로그인</string>
 </resources>

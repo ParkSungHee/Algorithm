@@ -10,6 +10,7 @@
         android:id="@+id/loginTitleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +87,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/background_green_fil_radius_10dp"
+        android:background="@drawable/background_green_fill_radius_10dp"
         android:text="@string/login"
         android:textColor="@color/logo"
         android:textSize="20dp"
@@ -96,6 +97,86 @@
         app:layout_constraintTop_toBottomOf="@id/passwordText" />
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/googleSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/background_white_fill_radius_10dp"
+        android:elevation="@dimen/common_margin_10dp"
+        android:padding="@dimen/common_margin_11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton">
+
+        <ImageView
+            android:id="@+id/googleButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="81dp"
+            android:src="@drawable/icon_google_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/googleLoginText"
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin_17dp"
+            android:text="@string/googleLogin"
+            android:textSize="@dimen/common_margin_17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/googleButtonImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/withoutLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/firstTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/firstTime"
+            android:textSize="@dimen/common_margin_17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/signUpText"
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin_5dp"
+            android:text="@string/signUp"
+            android:textSize="@dimen/common_margin_18dp"
+            app:layout_constraintBottom_toBottomOf="@id/firstTime"
+            app:layout_constraintStart_toEndOf="@id/firstTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/withoutLoginButton"
+        style="@style/CommonText.White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_green_fill"
+        android:padding="@dimen/common_margin_20dp"
+        android:text="@string/withoutLogin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

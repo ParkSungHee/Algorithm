@@ -14,6 +14,11 @@ import com.gun0912.tedpermission.TedPermission;
 
 import java.util.List;
 
+import kr.co.gracegirls.tmi.view.login.LoginActivity;
+
+import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_ACTIVITY_STATUS;
+import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_FROM_SPLASH;
+
 public class SplashScreenActivity extends AppCompatActivity {
     private CheckPermissionListener checkPermissionListener = new CheckPermissionListener();
     private Context context = this;
@@ -34,7 +39,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                intent.putExtra(START_ACTIVITY_STATUS, START_FROM_SPLASH);
+                startActivity(intent);
                 finish();
             }
         }, 1000);
@@ -52,6 +59,12 @@ public class SplashScreenActivity extends AppCompatActivity {
             Toast.makeText(context, "권한 설정 후 앱을 사용 해주세요!", Toast.LENGTH_SHORT).show();
             finishAffinity();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }
 
