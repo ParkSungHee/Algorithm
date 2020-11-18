@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
-import kr.co.gracegirls.tmi.data.MountainListItem;
+import kr.co.gracegirls.tmi.data.item.MountainListItem;
 
 public class HomeMountainAdapter extends RecyclerView.Adapter<HomeMountainAdapter.HomeMountainViewHolder> {
 

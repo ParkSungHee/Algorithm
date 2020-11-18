@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
-import kr.co.gracegirls.tmi.data.ShelterLIstItem;
+import kr.co.gracegirls.tmi.data.item.ShelterLIstItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
 
 public class ShelterFragment extends Fragment implements OnMapReadyCallback {
