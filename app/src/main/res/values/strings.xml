@@ -30,4 +30,5 @@
     <string name="googleLogin">구글 로그인</string>
     <string name="duplication_check">중복확인</string>
     <string name="nickname">닉네임</string>
+    <string name="checkOkay">확인 완료</string>
 </resources>
