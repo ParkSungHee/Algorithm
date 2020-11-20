@@ -22,9 +22,13 @@
     <string name="shelter_name_temp">양폭 대피소</string>
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
+    <string name="password_duplicate_check">비밀번호 확인</string>
     <string name="login">로그인</string>
     <string name="withoutLogin">로그인 없이 사용하기</string>
     <string name="firstTime">처음 방문하셨나요?</string>
     <string name="signUp">회원가입</string>
     <string name="googleLogin">구글 로그인</string>
+    <string name="duplication_check">중복확인</string>
+    <string name="nickname">닉네임</string>
+    <string name="checkOkay">확인 완료</string>
 </resources>

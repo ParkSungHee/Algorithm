@@ -1,4 +1,4 @@
-package kr.co.gracegirls.tmi.data;
+package kr.co.gracegirls.tmi.data.item;
 
 public class MountainListItem {
 

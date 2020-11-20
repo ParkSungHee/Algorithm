@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
-import kr.co.gracegirls.tmi.data.MountainListItem;
+import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {

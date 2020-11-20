@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.common.SignInButton;
+
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.view.common.MainActivity;
+import kr.co.gracegirls.tmi.view.signup.SignUpActivity;
 
 import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_ACTIVITY_STATUS;
 import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_FROM_SPLASH;
@@ -58,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.signUpText:
-                Toast.makeText(context, "회원가입", Toast.LENGTH_SHORT).show();
+                startSignUpActivity();
                 break;
         }
     }
@@ -71,5 +74,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void showWithoutLoginButton() {
         findViewById(R.id.withoutLoginButton).setVisibility(View.VISIBLE);
+    }
+
+    private void startSignUpActivity() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
     }
 }

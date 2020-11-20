@@ -27,5 +27,7 @@
     <dimen name="common_margin_19dp">19dp</dimen>
     <dimen name="common_margin_20dp">20dp</dimen>
 
+    <dimen name="common_title_bar_top_margin">5dp</dimen>
+
 
 </resources>

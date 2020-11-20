@@ -1,6 +1,5 @@
 package kr.co.gracegirls.tmi.view.shelter;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
-import kr.co.gracegirls.tmi.data.ShelterLIstItem;
+import kr.co.gracegirls.tmi.data.item.ShelterLIstItem;
 
 public class ShelterListAdapter extends RecyclerView.Adapter<ShelterListAdapter.ShelterListViewHolder> {
 
