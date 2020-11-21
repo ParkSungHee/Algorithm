@@ -71,21 +71,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void listenerInit() {
-        signUpListener = new SignUpListener() {
-            @Override
-            public boolean checkEmailDuplicate(String email) {
-                return fireStoreAccessor.isEmailDuplicate(email);
-            }
-
-            @Override
-            public boolean checkSignUpIsSuccessful(SignUpMetaData metaData) {
-                return true;
-            }
-        };
-    }
-
-
     private void showNickNameInput() {
         nickNameContentBox.startAnimation(translateDown);
         nickNameContentBox.setVisibility(View.VISIBLE);
@@ -117,11 +102,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         passwordDuplicateContentBox.setVisibility(View.VISIBLE);
     }
 
+    private void listenerInit() {
+        signUpListener = new SignUpListener() {
+            @Override
+            public void checkEmailDuplicate(boolean isExist) {
+                emailDuplicateCheck(isExist);
+            }
+
+            @Override
+            public boolean checkSignUpIsSuccessful(SignUpMetaData data) {
+                return false;
+            }
+        };
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.emailDuplicationCheckButton:
-                emailDuplicateCheck();
+                email = emailInput.getText().toString();
+                fireStoreAccessor.checkEmailDuplicate(email, signUpListener);
                 break;
             case R.id.signUpDoneButton:
 
@@ -130,9 +130,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void emailDuplicateCheck() {
-        email = emailInput.getText().toString();
-        if (signUpListener.checkEmailDuplicate(email)) {
+    private void emailDuplicateCheck(boolean isExist) {
+        if (!isExist) {
             emailDuplicationCheckButton.setClickable(false);
             emailInput.setClickable(false);
             emailCheckDoneButton.setVisibility(View.VISIBLE);
@@ -147,6 +146,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "존재하는 이메일입니다.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     static class OpenMenuAnimationListener implements Animation.AnimationListener {
 
