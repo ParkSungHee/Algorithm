@@ -2,6 +2,7 @@ package kr.co.gracegirls.tmi.view.signup;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -121,7 +122,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.emailDuplicationCheckButton:
                 email = emailInput.getText().toString();
-                fireStoreAccessor.checkEmailDuplicate(email, signUpListener);
+                if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    fireStoreAccessor.checkEmailDuplicate(email, signUpListener);
+                } else {
+                    Toast.makeText(context, getString(R.string.email_validation_check_false), Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.signUpDoneButton:
 

@@ -31,4 +31,5 @@
     <string name="duplication_check">중복확인</string>
     <string name="nickname">닉네임</string>
     <string name="checkOkay">확인 완료</string>
+    <string name="email_validation_check_false">올바른 이메일 형식이 아닙니다.</string>
 </resources>
