@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="@dimen/common_margin_15dp"
+            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toStartOf="@id/emailDuplicationCheckButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +68,7 @@
             android:background="@drawable/background_green_fill_radius_7dp"
             android:elevation="@dimen/common_margin_15dp"
             android:gravity="center"
-            android:text="@string/checkOkay"
+            android:text="@string/resetting"
             android:textAlignment="center"
             android:textSize="@dimen/common_margin_15dp"
             android:visibility="gone"
@@ -105,9 +106,37 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="@dimen/common_margin_15dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nicknameUseButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/nicknameUseButton"
+            style="@style/CommonText.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textAlignment="center"
+            android:textSize="@dimen/common_margin_15dp"
+            app:layout_constraintBottom_toBottomOf="@id/nicknameInput"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/nicknameUseButton2"
+            style="@style/CommonText.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_green_fill_radius_7dp"
+            android:elevation="@dimen/common_margin_15dp"
+            android:gravity="center"
+            android:text="@string/resetting"
+            android:textAlignment="center"
+            android:textSize="@dimen/common_margin_15dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/nicknameInput"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,6 +170,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="@dimen/common_margin_15dp"
             android:inputType="numberPassword"
+            android:maxLength="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -170,6 +200,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/passwordDuplicateTrue"
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordCheckDone"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="@dimen/common_margin_12dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/passwordDuplicateText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/passwordDuplicateFalse"
+            style="@style/CommonText.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordCheckfalse"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/common_margin_12dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/passwordDuplicateText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/passwordDuplicateInput"
             android:layout_width="0dp"
@@ -177,6 +233,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="@dimen/common_margin_15dp"
             android:inputType="numberPassword"
+            android:maxLength="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -195,6 +252,24 @@
         android:background="@drawable/background_green_fill_radius_10dp"
         android:text="완료"
         android:textColor="@color/logo"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/signUpDoneButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_gray_line_radius_7dp"
+        android:text="완료"
+        android:textColor="@android:color/darker_gray"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
