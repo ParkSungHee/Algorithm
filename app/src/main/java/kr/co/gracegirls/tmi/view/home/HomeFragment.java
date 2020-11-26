@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -53,11 +54,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(homeMountainAdapter);
 
+        // BitmapDescriptorFactory 생성하기 위한 소스
+        MapsInitializer.initialize(getActivity().getApplicationContext());
+        
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.home_map);
 
         mapFragment.getMapAsync(this);
-
 
         return view;
     }
@@ -70,6 +73,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(center).zoom(15).build();
+
             mMap.moveCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
 
