@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -34,12 +35,13 @@ import io.reactivex.Maybe;
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
+import kr.co.gracegirls.tmi.util.GCGViewUtil;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMapClickListener {
 
-    private GoogleMap mMap;
+    private GoogleMap googleMap;
     private RecyclerView recyclerView;
     private HomeMountainAdapter homeMountainAdapter;
     private List<MountainListItem> mountainListItems;
@@ -67,6 +69,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(homeMountainAdapter);
 
+        // BitmapDescriptorFactory 생성하기 위한 소스
+        MapsInitializer.initialize(getActivity().getApplicationContext());
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.home_map);
 
@@ -77,18 +82,19 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        this.googleMap = googleMap;
 
+        //TODO - 동적으로 바꾸어야함
         final LatLng center = new LatLng(35.1434021, 126.7988363);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(center));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
 
-        Marker marker = mMap.addMarker(new MarkerOptions()
+        Marker marker = this.googleMap.addMarker(new MarkerOptions()
                 .position(center)
                 .title("송정공원역"));
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+            this.googleMap.setMyLocationEnabled(true);
         } else {
             checkLocationPermissionWithRationale();
         }
@@ -119,7 +125,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        mMap.setMyLocationEnabled(true);
+                        googleMap.setMyLocationEnabled(true);
                     }
                 } else {
                     Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
@@ -137,7 +143,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         markerOptions.position(latLng);
         markerOptions.title("출발");
 
-        mMap.addMarker(markerOptions).showInfoWindow();
+        googleMap.addMarker(markerOptions).showInfoWindow();
 
         // 맵셋팅
         arrayPoints.add(latLng);
@@ -156,7 +162,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                             build();
 
                     // Showing the current location in Google Map
-                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
 
                     // 기존 마커 삭제.
                     if (marker != null) {
@@ -170,8 +176,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                             title("현재위치");
                             //title(MiRunResourceUtil.GetString(R.string.label_record_current_position));
 
-                    marker = mMap.addMarker(optFirst);
+                    marker = googleMap.addMarker(optFirst);
                 },
-                () -> MiRunViewUtil.ShowToast("hi"));
+                () -> GCGViewUtil.ShowToast("hi"));
     }
 }
