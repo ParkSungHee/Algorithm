@@ -1,6 +1,9 @@
 package kr.co.gracegirls.tmi.data.item;
 
-public class MountainListItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MountainListItem implements Parcelable {
 
     private String documentID;
     private String name;
@@ -17,6 +20,42 @@ public class MountainListItem {
         this.height = height;
         this.riskPoint = riskPoint;
     }
+
+    protected MountainListItem(Parcel in) {
+        documentID = in.readString();
+        name = in.readString();
+        location = in.readString();
+        imgPath = in.readString();
+        height = in.readString();
+        riskPoint = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(documentID);
+        dest.writeString(name);
+        dest.writeString(location);
+        dest.writeString(imgPath);
+        dest.writeString(height);
+        dest.writeString(riskPoint);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MountainListItem> CREATOR = new Creator<MountainListItem>() {
+        @Override
+        public MountainListItem createFromParcel(Parcel in) {
+            return new MountainListItem(in);
+        }
+
+        @Override
+        public MountainListItem[] newArray(int size) {
+            return new MountainListItem[size];
+        }
+    };
 
     public String getDocumentID() {
         return documentID;
@@ -60,9 +99,5 @@ public class MountainListItem {
 
     public String getRiskPoint() {
         return riskPoint;
-    }
-
-    public void setRiskPoint(String riskPoint) {
-        this.riskPoint = riskPoint;
     }
 }

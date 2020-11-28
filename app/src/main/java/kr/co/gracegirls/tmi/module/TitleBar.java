@@ -15,6 +15,7 @@ import kr.co.gracegirls.tmi.R;
 public class TitleBar extends ConstraintLayout {
 
     View view;
+    public ImageButton backButton;
 
     public TitleBar(@NonNull Context context) {
         super(context);
@@ -30,7 +31,7 @@ public class TitleBar extends ConstraintLayout {
         TextView titleText = findViewById(R.id.title_text);
         titleText.setText(title);
 
-        ImageButton backButton = findViewById(R.id.title_back_button);
+        backButton = findViewById(R.id.title_back_button);
         if (isBackPressed) {
             backButton.setVisibility(View.VISIBLE);
         } else {
