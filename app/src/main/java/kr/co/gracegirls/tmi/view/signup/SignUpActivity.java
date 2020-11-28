@@ -1,6 +1,7 @@
 package kr.co.gracegirls.tmi.view.signup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -220,10 +221,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 nickNameUsingThis(false);
                 break;
             case R.id.signUpDoneButton:
-
+                signUpDone();
                 break;
         }
 
+    }
+
+    private void signUpDone() {
+        Intent intent = new Intent(this, SignUpDoneActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void nickNameUsingThis(boolean flag) {
