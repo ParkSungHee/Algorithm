@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ import java.util.List;
 import Njava.util.function.MaybeUtil;
 import io.reactivex.Maybe;
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.util.GCGViewUtil;
@@ -49,6 +52,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     private List<MarkerOptions> arrayMarkerOptions = new ArrayList<>();
     private Marker marker;
 
+    private MountainListListener mountainListListener;
+    private FireStoreAccessor fireStoreAccessor = new FireStoreAccessor();
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -57,17 +63,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         titleBar.init(getString(R.string.appName), false);
         recyclerView = view.findViewById(R.id.mountain_list);
 
-        mountainListItems = new ArrayList<>();
-        mountainListItems.add(new MountainListItem("산0", 0, "우리집이다"));
-        mountainListItems.add(new MountainListItem("산1", 10, "우리집이다1"));
-        mountainListItems.add(new MountainListItem("산2", 20, "우리집이다2"));
-        mountainListItems.add(new MountainListItem("산3", 30, "우리집이다3"));
-        mountainListItems.add(new MountainListItem("산4", 40, "우리집이다4"));
-        mountainListItems.add(new MountainListItem("산5", 50, "우리집이다5"));
+        initMountainList();
+        fireStoreAccessor.getMountainInformation(mountainListListener);
 
-        homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(homeMountainAdapter);
 
         // BitmapDescriptorFactory 생성하기 위한 소스
         MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -78,6 +76,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         mapFragment.getMapAsync(this); //지도 객체 얻기
 
         return view;
+    }
+
+    private void initMountainList() {
+        mountainListItems = new ArrayList<>();
+
+        mountainListListener = new MountainListListener() {
+            @Override
+            public void setMountainList(ArrayList<MountainListItem> mountainListItem) {
+                mountainListItems = mountainListItem;
+                homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems);
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerView.setAdapter(homeMountainAdapter);
+            }
+        };
     }
 
     @Override
@@ -93,12 +105,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 .position(center)
                 .title("송정공원역"));
 
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             this.googleMap.setMyLocationEnabled(true);
         } else {
             checkLocationPermissionWithRationale();
         }
     }
+
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private void checkLocationPermissionWithRationale() {
@@ -151,7 +164,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void setDrawMaker(Maybe<Location> myLocationMaybe) {
-                MaybeUtil.Subscribe(myLocationMaybe,
+        MaybeUtil.Subscribe(myLocationMaybe,
 
                 location -> {
                     // Creating a LatLng object for the current location
@@ -173,8 +186,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                     MarkerOptions optFirst = new MarkerOptions().
                             position(latLng).
                             //icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_pink)).
-                            title("현재위치");
-                            //title(MiRunResourceUtil.GetString(R.string.label_record_current_position));
+                                    title("현재위치");
+                    //title(MiRunResourceUtil.GetString(R.string.label_record_current_position));
 
                     marker = googleMap.addMarker(optFirst);
                 },

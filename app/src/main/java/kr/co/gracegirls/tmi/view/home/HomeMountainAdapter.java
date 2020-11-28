@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -34,9 +37,15 @@ public class HomeMountainAdapter extends RecyclerView.Adapter<HomeMountainAdapte
     @Override
     public void onBindViewHolder(@NonNull HomeMountainViewHolder holder, int position) {
         data = mountainList.get(position);
-        holder.title.setText(data.getTitle());
+
+        Glide.with(holder.itemView.getContext())
+                .load(data.getImgPath())
+                .into(holder.imageView);
+
+        holder.name.setText(data.getName());
+        holder.height.setText(data.getHeight() + "m");
         holder.location.setText(data.getLocation());
-        holder.riskPoint.setText(data.getRiskPoint() + "");
+        holder.riskPoint.setText(data.getRiskPoint());
     }
 
     @Override
@@ -46,11 +55,14 @@ public class HomeMountainAdapter extends RecyclerView.Adapter<HomeMountainAdapte
 
     class HomeMountainViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView title, riskPoint, location;
+        ImageView imageView;
+        TextView name, location, riskPoint, height;
 
         public HomeMountainViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.title = itemView.findViewById(R.id.mountain_title);
+            this.imageView = itemView.findViewById(R.id.mountain_img);
+            this.name = itemView.findViewById(R.id.mountain_title);
+            this.height = itemView.findViewById(R.id.mountain_height);
             this.riskPoint = itemView.findViewById(R.id.mountain_risk_point);
             this.location = itemView.findViewById(R.id.mountain_location);
         }

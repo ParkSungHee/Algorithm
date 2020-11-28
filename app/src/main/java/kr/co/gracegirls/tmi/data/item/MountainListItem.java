@@ -2,30 +2,36 @@ package kr.co.gracegirls.tmi.data.item;
 
 public class MountainListItem {
 
-    private String title;
-    private int riskPoint;
+    private String documentID;
+    private String name;
     private String location;
+    private String imgPath;
+    private String height;
+    private String riskPoint;
 
-    public MountainListItem(String name, int riskPoint, String location) {
-        this.title = name;
-        this.riskPoint = riskPoint;
+    public MountainListItem(String documentID, String name, String location, String imgPath, String height, String riskPoint) {
+        this.documentID = documentID;
+        this.name = name;
         this.location = location;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getRiskPoint() {
-        return riskPoint;
-    }
-
-    public void setRiskPoint(int riskPoint) {
+        this.imgPath = imgPath;
+        this.height = height;
         this.riskPoint = riskPoint;
+    }
+
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {
@@ -36,12 +42,27 @@ public class MountainListItem {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "MountainListItem{" +
-                "name='" + title + '\'' +
-                ", riskPoint=" + riskPoint +
-                ", address='" + location + '\'' +
-                '}';
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getRiskPoint() {
+        return riskPoint;
+    }
+
+    public void setRiskPoint(String riskPoint) {
+        this.riskPoint = riskPoint;
     }
 }
