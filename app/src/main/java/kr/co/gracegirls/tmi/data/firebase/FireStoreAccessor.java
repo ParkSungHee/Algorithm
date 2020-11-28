@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class FireStoreAccessor {
     public void getMountainInformation(MountainListListener mountainListListener) {
         ArrayList<MountainListItem> arrayList;
         db.collection(FirebaseConfig.MOUNTAIN)
+                .orderBy(FirebaseConfig.RISK_POINT, Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
