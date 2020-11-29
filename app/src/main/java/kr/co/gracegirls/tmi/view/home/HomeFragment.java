@@ -32,14 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-import Njava.util.function.MaybeUtil;
-import io.reactivex.Maybe;
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
-import kr.co.gracegirls.tmi.data.firebase.FirebaseConfig;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
-import kr.co.gracegirls.tmi.util.GCGViewUtil;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
@@ -162,36 +158,5 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         // 맵셋팅
         arrayPoints.add(latLng);
         arrayMarkerOptions.add(markerOptions);
-    }
-
-    public void setDrawMaker(Maybe<Location> myLocationMaybe) {
-        MaybeUtil.Subscribe(myLocationMaybe,
-
-                location -> {
-                    // Creating a LatLng object for the current location
-                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                    CameraPosition cp = new CameraPosition.Builder().target((latLng)).
-                            zoom(17).
-                            build();
-
-                    // Showing the current location in Google Map
-                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-
-                    // 기존 마커 삭제.
-                    if (marker != null) {
-                        marker.remove();
-                    }
-
-                    // 마커 설정.
-                    MarkerOptions optFirst = new MarkerOptions().
-                            position(latLng).
-                            //icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_pink)).
-                                    title("현재위치");
-                    //title(MiRunResourceUtil.GetString(R.string.label_record_current_position));
-
-                    marker = googleMap.addMarker(optFirst);
-                },
-                () -> GCGViewUtil.ShowToast("hi"));
     }
 }
