@@ -31,29 +31,111 @@
         app:layout_constraintTop_toBottomOf="@id/shelter_title" />
 
     <TextView
-        android:id="@+id/shelter_location_al"
+        android:id="@+id/shelter_latitude"
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_10dp"
-        android:text="위도 : 35.123\n경도 : 129.3432\n고도 : 77.0m"
+        android:text="위도 : "
         android:textAlignment="textStart"
         android:textSize="@dimen/common_margin_13dp"
-        app:layout_constraintStart_toStartOf="@id/shelter_title"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/shelter_location"
         app:layout_constraintTop_toBottomOf="@id/shelter_location" />
 
     <TextView
-        android:id="@+id/shelter_tmp"
+        android:id="@+id/shelter_latitude_pos"
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_10dp"
-        android:layout_marginEnd="10dp"
-        android:text="수용인원 : 30\n예약 방법 : 인터넷"
+        android:text="00"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/shelter_latitude"
+        app:layout_constraintStart_toEndOf="@id/shelter_latitude" />
+
+    <TextView
+        android:id="@+id/shelter_longitude"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="경도 : "
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/shelter_latitude"
+        app:layout_constraintTop_toBottomOf="@id/shelter_latitude" />
+
+    <TextView
+        android:id="@+id/shelter_longitude_pos"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강원도 속초시 설악동 산 41"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/shelter_longitude"
+        app:layout_constraintStart_toEndOf="@id/shelter_longitude" />
+
+    <TextView
+        android:id="@+id/shelter_height"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="높이 : "
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/shelter_longitude"
+        app:layout_constraintTop_toBottomOf="@id/shelter_longitude" />
+
+    <TextView
+        android:id="@+id/shelter_height_pos"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00m"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/shelter_height"
+        app:layout_constraintStart_toEndOf="@id/shelter_height" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shelter_people"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="수용인원 : "
         android:textAlignment="textStart"
         android:textSize="@dimen/common_margin_15dp"
-        app:layout_constraintBottom_toBottomOf="@id/shelter_location_al"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/shelter_latitude" />
+
+    <TextView
+        android:id="@+id/shelter_people_count"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="00"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_15dp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/shelter_people"
+        app:layout_constraintTop_toTopOf="@id/shelter_latitude" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

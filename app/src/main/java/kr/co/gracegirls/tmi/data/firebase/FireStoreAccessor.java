@@ -12,7 +12,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
+import kr.co.gracegirls.tmi.data.item.ShelterListItem;
 import kr.co.gracegirls.tmi.view.home.MountainListListener;
+import kr.co.gracegirls.tmi.view.shelter.ShelterListAdapter;
+import kr.co.gracegirls.tmi.view.shelter.ShelterListListener;
 import kr.co.gracegirls.tmi.view.signup.SignUpListener;
 
 public class FireStoreAccessor {
@@ -37,7 +40,6 @@ public class FireStoreAccessor {
     }
 
     public void getMountainInformation(MountainListListener mountainListListener) {
-        ArrayList<MountainListItem> arrayList;
         db.collection(FirebaseConfig.MOUNTAIN)
                 .orderBy(FirebaseConfig.RISK_POINT, Query.Direction.ASCENDING)
                 .get()
@@ -58,4 +60,27 @@ public class FireStoreAccessor {
                     }
                 });
     }
+
+    public void getShelterList(ShelterListListener shelterListListener) {
+        db.collection(FirebaseConfig.SHELTER)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<ShelterListItem> shelterListItems = new ArrayList<>();
+                        for (DocumentSnapshot snap : Objects.requireNonNull(task.getResult())) {
+                            Map<String, Object> shot = snap.getData();
+                            String name = String.valueOf(shot.get(FirebaseConfig.NAME));
+                            String address = String.valueOf(shot.get(FirebaseConfig.ADDRESS));
+                            String height = String.valueOf(shot.get(FirebaseConfig.HEIGHT));
+                            String people = String.valueOf(shot.get(FirebaseConfig.PEOPLE));
+                            String latitude = String.valueOf(shot.get(FirebaseConfig.LATITUDE));
+                            String longitude = String.valueOf(shot.get(FirebaseConfig.LONGITUDE));
+                            shelterListItems.add(new ShelterListItem(name, address, latitude, longitude, height, people));
+                        }
+                        shelterListListener.setShelterList(shelterListItems);
+                    }
+                });
+    }
+
+
 }
