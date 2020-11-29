@@ -47,18 +47,20 @@
             android:text="0.00\n킬로미터" />
 
         <TextView
+            android:id="@+id/walk_num"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="000\n걸음수" />
+            android:text="0\n걸음" />
 
         <TextView
+            android:id="@+id/time_out"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="00:00\n시간" />
+            android:layout_weight="0.59"
+            android:text="00:00:00\n시간" />
 
     </LinearLayout>
 
@@ -95,8 +97,25 @@
 
     </LinearLayout>
 
+
+
     <ImageButton
-        android:id="@+id/startButton"
+        android:id="@+id/btn_stop"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/icon_stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box1"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <ImageButton
+        android:id="@+id/btn_start"
+        android:onClick="onClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -105,6 +124,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/box2"
-        app:layout_constraintVertical_bias="0.993" />
+        app:layout_constraintTop_toBottomOf="@+id/box1"
+        app:layout_constraintVertical_bias="0.93" />
 </androidx.constraintlayout.widget.ConstraintLayout>
