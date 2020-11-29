@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "690818200090",
+    "firebase_url": "https://grace-girls.firebaseio.com",
+    "project_id": "grace-girls",
+    "storage_bucket": "grace-girls.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690818200090:android:c6531aa140bb7b207297a3",
+        "android_client_info": {
+          "package_name": "kr.co.gracegirls.tmi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690818200090-vbboqlfbogigend8vbcc0v0nidghaask.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRHGoePDw0bnmCXNt0WI8_eGQYRStLKJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690818200090-vbboqlfbogigend8vbcc0v0nidghaask.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
