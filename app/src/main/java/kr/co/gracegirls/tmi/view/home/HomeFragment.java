@@ -4,12 +4,17 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +32,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,19 +107,152 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         this.googleMap = googleMap;
 
         //TODO - 동적으로 바꾸어야함
-        final LatLng center = new LatLng(35.1434021, 126.7988363);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(center));
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
 
-        Marker marker = this.googleMap.addMarker(new MarkerOptions()
-                .position(center)
-                .title("송정공원역"));
+        LatLng seunghack = new LatLng(37.44237920148298, 126.68814372688384);
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.googleMap.setMyLocationEnabled(true);
-        } else {
-            checkLocationPermissionWithRationale();
-        }
+        MarkerOptions seunghackMarker = new MarkerOptions();
+        seunghackMarker.position(seunghack);
+        seunghackMarker.title("승학산");
+
+
+        BitmapDrawable bitmapdraw_seunghack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        Bitmap b_seunghack=bitmapdraw_seunghack.getBitmap();
+        Bitmap smallMarker_seunghack = Bitmap.createScaledBitmap(b_seunghack, 100, 100, false);
+        seunghackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seunghack));
+
+
+        googleMap.addMarker(seunghackMarker);
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(seunghack));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        LatLng munhack = new LatLng(37.43297284354754, 126.67936844300222);
+
+        MarkerOptions munhackMarker = new MarkerOptions();
+        munhackMarker.position(munhack);
+        munhackMarker.title("문학산");
+
+
+        BitmapDrawable bitmapdraw_munhack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        Bitmap b_munhack=bitmapdraw_munhack.getBitmap();
+        Bitmap smallMarker_munhack = Bitmap.createScaledBitmap(b_munhack, 100, 100, false);
+        munhackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_munhack));
+
+
+        googleMap.addMarker(munhackMarker);
+
+        LatLng subong = new LatLng(37.459951290094594, 126.66331831339058);
+
+        MarkerOptions subongMarker = new MarkerOptions();
+        subongMarker.position(subong);
+        subongMarker.title("수봉산");
+
+
+        BitmapDrawable bitmapdraw_subong=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_subong=bitmapdraw_subong.getBitmap();
+        Bitmap smallMarker_subong = Bitmap.createScaledBitmap(b_subong, 100, 100, false);
+        subongMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_subong));
+
+
+        googleMap.addMarker(subongMarker);
+
+        LatLng chung = new LatLng(37.42161694299056, 126.65797311321575);
+
+        MarkerOptions chungMarker = new MarkerOptions();
+        chungMarker.position(chung);
+        chungMarker.title("청량산");
+
+
+        BitmapDrawable bitmapdraw_chung=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_chung=bitmapdraw_chung.getBitmap();
+        Bitmap smallMarker_chung = Bitmap.createScaledBitmap(b_chung, 100, 100, false);
+        chungMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_chung));
+
+
+        googleMap.addMarker(chungMarker);
+
+        LatLng jubong = new LatLng(38.17428213313527, 128.54178643183315);
+
+        MarkerOptions jubongMarker = new MarkerOptions();
+        jubongMarker.position(jubong);
+        jubongMarker.title("주봉산");
+
+
+        BitmapDrawable bitmapdraw_jubong=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_jubong=bitmapdraw_jubong.getBitmap();
+        Bitmap smallMarker_jubong = Bitmap.createScaledBitmap(b_jubong, 100, 100, false);
+        jubongMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_jubong));
+
+
+        googleMap.addMarker(jubongMarker);
+
+        LatLng seolak = new LatLng(38.17744047805365, 128.49960343368417);
+
+        MarkerOptions seolakMarker = new MarkerOptions();
+        seolakMarker.position(seolak);
+        seolakMarker.title("설악산");
+
+
+        BitmapDrawable bitmapdraw_seolak=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_seolak=bitmapdraw_seolak.getBitmap();
+        Bitmap smallMarker_seolak = Bitmap.createScaledBitmap(b_seolak, 100, 100, false);
+        seolakMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seolak));
+
+
+        googleMap.addMarker(seolakMarker);
+
+        LatLng chungdae = new LatLng(38.179900855708034, 128.56960158530646);
+
+        MarkerOptions chungdaeMarker = new MarkerOptions();
+        chungdaeMarker.position(chungdae);
+        chungdaeMarker.title("청대산");
+
+
+        BitmapDrawable bitmapdraw_chungdae=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_chungdae=bitmapdraw_chungdae.getBitmap();
+        Bitmap smallMarker_chungdae = Bitmap.createScaledBitmap(b_chungdae, 100, 100, false);
+        chungdaeMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_chungdae));
+
+
+        googleMap.addMarker(chungdaeMarker);
+
+        LatLng gucksa = new LatLng(38.222634396570406, 128.56193099467598);
+
+        MarkerOptions gucksaMarker = new MarkerOptions();
+        gucksaMarker.position(gucksa);
+        gucksaMarker.title("국사봉");
+
+
+        BitmapDrawable bitmapdraw_gucksa=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_gucksa=bitmapdraw_gucksa.getBitmap();
+        Bitmap smallMarker_gucksa = Bitmap.createScaledBitmap(b_gucksa, 100, 100, false);
+        gucksaMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_gucksa));
+
+
+        googleMap.addMarker(gucksaMarker);
+
+        LatLng hanra = new LatLng(33.36302691656733, 126.52950980078691);
+
+        MarkerOptions hanraMarker = new MarkerOptions();
+        hanraMarker.position(hanra);
+        hanraMarker.title("한라산");
+
+
+        BitmapDrawable bitmapdraw_hanra=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_hanra=bitmapdraw_hanra.getBitmap();
+        Bitmap smallMarker_hanra = Bitmap.createScaledBitmap(b_hanra, 100, 100, false);
+        hanraMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_hanra));
+
+
+        googleMap.addMarker(hanraMarker);
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.44184293474863, 126.66703827786698)));
+       // googleMap.moveCamera(CameraUpdateFactory.newLatLng(hanra));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+
+
+
+
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -164,34 +306,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         arrayMarkerOptions.add(markerOptions);
     }
 
-    public void setDrawMaker(Maybe<Location> myLocationMaybe) {
-        MaybeUtil.Subscribe(myLocationMaybe,
 
-                location -> {
-                    // Creating a LatLng object for the current location
-                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    CameraPosition cp = new CameraPosition.Builder().target((latLng)).
-                            zoom(17).
-                            build();
-
-                    // Showing the current location in Google Map
-                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-
-                    // 기존 마커 삭제.
-                    if (marker != null) {
-                        marker.remove();
-                    }
-
-                    // 마커 설정.
-                    MarkerOptions optFirst = new MarkerOptions().
-                            position(latLng).
-                            //icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_pink)).
-                                    title("현재위치");
-                    //title(MiRunResourceUtil.GetString(R.string.label_record_current_position));
-
-                    marker = googleMap.addMarker(optFirst);
-                },
-                () -> GCGViewUtil.ShowToast("hi"));
-    }
 }
