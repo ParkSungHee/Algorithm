@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_gray_line_radius_7dp"
     android:layout_marginBottom="@dimen/common_margin_10dp"
+    android:background="@drawable/background_gray_line_radius_7dp"
     android:padding="@dimen/common_margin_14dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,15 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background_gray_line_radius_7dp"
-        android:padding="@dimen/common_margin_13dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/mountain_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:src="@drawable/temp_mountain"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,16 +66,40 @@
         app:layout_constraintTop_toBottomOf="@id/mountain_title" />
 
     <TextView
+        android:id="@+id/mheight"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:text="높이 : "
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        app:layout_constraintStart_toStartOf="@id/mountain_title"
+        app:layout_constraintTop_toBottomOf="@id/mountain_risk_index" />
+
+    <TextView
+        android:id="@+id/mountain_height"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_10dp"
+        android:text="높이"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/common_margin_13dp"
+        app:layout_constraintStart_toEndOf="@id/mheight"
+        app:layout_constraintTop_toBottomOf="@id/mountain_risk_index" />
+
+    <TextView
         android:id="@+id/mountain_location"
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_margin_10dp"
-        android:text="@string/address"
+        android:text="주소"
         android:textAlignment="textStart"
         android:textSize="@dimen/common_margin_13dp"
         app:layout_constraintStart_toStartOf="@id/mountain_title"
-        app:layout_constraintTop_toBottomOf="@id/mountain_risk_index" />
+        app:layout_constraintTop_toBottomOf="@id/mountain_height" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.home.MountainDetailActivity">
+
+    <kr.co.gracegirls.tmi.module.TitleBar
+        android:id="@+id/detailTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mountain_title"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="위험지수"
+        app:layout_constraintStart_toStartOf="@id/risk_index"
+        app:layout_constraintTop_toBottomOf="@id/detailTitleBar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/risk_index"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:src="@drawable/icon_safe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mountain_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/risk_index">
+
+        <TextView
+            android:id="@+id/choice_day"
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="15dp"
+            android:paddingStart="30dp"
+            android:text="날짜 선택"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/show_weather"
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="15dp"
+            android:paddingStart="30dp"
+            android:text="산의 날씨 확인하기"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/show_detail"
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="15dp"
+            android:paddingStart="30dp"
+            android:text="산의 상세정보 보기"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/show_shelter"
+            style="@style/CommonText.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_gray_line_radius_7dp"
+            android:padding="15dp"
+            android:paddingStart="30dp"
+            android:text="대피소 보기"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

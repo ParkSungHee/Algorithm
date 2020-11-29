@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".view.signup.SignUpActivity"></activity>
+        <activity android:name=".view.home.MountainDetailActivity"></activity>
+        <activity android:name=".view.signup.SignUpDoneActivity" />
+        <activity android:name=".view.signup.SignUpActivity" />
         <activity android:name=".view.login.LoginActivity" />
 
         <uses-library

@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,8 @@ import java.util.List;
 import Njava.util.function.MaybeUtil;
 import io.reactivex.Maybe;
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
+import kr.co.gracegirls.tmi.data.firebase.FirebaseConfig;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.util.GCGViewUtil;
@@ -55,6 +62,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     private List<MarkerOptions> arrayMarkerOptions = new ArrayList<>();
     private Marker marker;
 
+    private MountainListListener mountainListListener;
+    private FireStoreAccessor fireStoreAccessor = new FireStoreAccessor();
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -63,17 +73,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         titleBar.init(getString(R.string.appName), false);
         recyclerView = view.findViewById(R.id.mountain_list);
 
-        mountainListItems = new ArrayList<>();
-        mountainListItems.add(new MountainListItem("산0", 0, "우리집이다"));
-        mountainListItems.add(new MountainListItem("산1", 10, "우리집이다1"));
-        mountainListItems.add(new MountainListItem("산2", 20, "우리집이다2"));
-        mountainListItems.add(new MountainListItem("산3", 30, "우리집이다3"));
-        mountainListItems.add(new MountainListItem("산4", 40, "우리집이다4"));
-        mountainListItems.add(new MountainListItem("산5", 50, "우리집이다5"));
+        initMountainList();
+        fireStoreAccessor.getMountainInformation(mountainListListener);
 
-        homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(homeMountainAdapter);
 
         // BitmapDescriptorFactory 생성하기 위한 소스
         MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -86,11 +88,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         return view;
     }
 
+    private void initMountainList() {
+        mountainListItems = new ArrayList<>();
+
+        mountainListListener = new MountainListListener() {
+            @Override
+            public void setMountainList(ArrayList<MountainListItem> mountainListItem) {
+                mountainListItems = mountainListItem;
+                homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems);
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerView.setAdapter(homeMountainAdapter);
+            }
+        };
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
         //TODO - 동적으로 바꾸어야함
+
         LatLng seunghack = new LatLng(37.44237920148298, 126.68814372688384);
 
         MarkerOptions seunghackMarker = new MarkerOptions();
@@ -234,7 +251,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
 
+
+
     }
+
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private void checkLocationPermissionWithRationale() {
@@ -285,6 +305,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         arrayPoints.add(latLng);
         arrayMarkerOptions.add(markerOptions);
     }
+
 
 
 }

@@ -4,7 +4,7 @@ import kr.co.gracegirls.tmi.data.metadata.SignUpMetaData;
 
 public interface SignUpListener {
 
-    boolean checkEmailDuplicate(String email);
+    void checkEmailDuplicate(boolean isExist);
 
     boolean checkSignUpIsSuccessful(SignUpMetaData data);
 }
