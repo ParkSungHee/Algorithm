@@ -4,17 +4,12 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,27 +23,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-
-import com.google.firebase.firestore.FirebaseFirestore;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
-import Njava.util.function.MaybeUtil;
-import io.reactivex.Maybe;
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
-import kr.co.gracegirls.tmi.data.firebase.FirebaseConfig;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
+import kr.co.gracegirls.tmi.data.item.ShelterListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
-import kr.co.gracegirls.tmi.util.GCGViewUtil;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
@@ -98,6 +85,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems);
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(homeMountainAdapter);
+            }
+
+            @Override
+            public void setShelterList(ArrayList<ShelterListItem> shelterListItems) {
             }
         };
     }

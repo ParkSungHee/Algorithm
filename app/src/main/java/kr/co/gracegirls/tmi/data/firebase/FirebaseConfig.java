@@ -11,4 +11,12 @@ public class FirebaseConfig {
     public static final String LOCATION = "location";
     public static final String NAME = "name";
     public static final String RISK_POINT = "riskPoint";
+
+
+    public static final String SHELTER = "shelter";
+    public static final String ADDRESS = "address";
+    public static final String MOUNTAIN_ID = "mountainId";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
+    public static final String PEOPLE = "people";
 }
