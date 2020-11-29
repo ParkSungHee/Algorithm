@@ -43,6 +43,7 @@ import java.util.Locale;
 
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
+import kr.co.gracegirls.tmi.util.PermissionUtils;
 
 
 public class RecordFragment extends Fragment implements OnMapReadyCallback,
@@ -56,10 +57,10 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
-    private Location mCurrentLocation;
-    private Marker mCurrentMarker;
+    private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
+    private Location currentLocation;
+    private Marker currentMarker;
     private LatLng startLatLng = new LatLng(0, 0);        //polyline 시작점
     private LatLng endLatLng = new LatLng(0, 0);         //polyline 끝점
     private boolean walkState = false;                          //걸음 상태
@@ -77,8 +78,8 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
         mapFragment.getMapAsync(this);
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(getActivity())
                     .addApi(LocationServices.API)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -126,13 +127,13 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        googleApiClient.connect();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
+        googleApiClient.disconnect();
     }
 
 
@@ -160,15 +161,15 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude(), longtitude = location.getLongitude();
 
-        if (mCurrentMarker != null) mCurrentMarker.remove();
-        mCurrentLocation = location;
+        if (currentMarker != null) currentMarker.remove();
+        currentLocation = location;
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(latitude, longtitude));
-        mCurrentMarker =  googleMap.addMarker(markerOptions);
+        currentMarker =  googleMap.addMarker(markerOptions);
 
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()), 18));
+                new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), 18));
         if(walkState){  //걸음 시작 버튼이 눌렸을 때
             endLatLng = new LatLng(latitude, longtitude);        //현재 위치를 끝점으로 설정
             drawPath();                                            //polyline 그리기
@@ -183,22 +184,22 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
             PermissionUtils.requestPermission((AppCompatActivity) getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (googleMap != null) {
-            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
             // Start location updates.
             LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, mLocationRequest, this);
+                    googleApiClient, locationRequest, this);
 
-            if (mCurrentLocation != null) {
-                Log.i("Location", "Latitude: " + mCurrentLocation.getLatitude()
-                        + ", Longitude: " + mCurrentLocation.getLongitude());
+            if (currentLocation != null) {
+                Log.i("Location", "Latitude: " + currentLocation.getLatitude()
+                        + ", Longitude: " + currentLocation.getLongitude());
             }
         }
     }
     protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
     
     public String getCurrentAddress( double latitude, double longitude) {
@@ -215,8 +216,8 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                     longitude,
                     7);
         } catch (IOException ioException) { //네트워크 문제
-            Toast.makeText(getActivity(), "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-            return "지오코더 서비스 사용불가";
+            Toast.makeText(getActivity(), "위치값을 위도, 경도로 표시할 수 없습니다", Toast.LENGTH_LONG).show();
+            return "위치값을 위도, 경도로 표시할 수 없습니다";
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(getActivity(), "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";

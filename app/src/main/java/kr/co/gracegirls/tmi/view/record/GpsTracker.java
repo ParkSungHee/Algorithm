@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 public class GpsTracker extends Service implements LocationListener {
-    private final Context mContext;
+    private final Context context;
     Location location;
     double latitude;
     double longitude;
@@ -25,13 +25,13 @@ public class GpsTracker extends Service implements LocationListener {
     protected LocationManager locationManager;
 
     public GpsTracker(Context context) {
-        this.mContext = context;
+        this.context = context;
         getLocation();
     }
 
     public Location getLocation() {
         try {
-            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
 
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -39,9 +39,9 @@ public class GpsTracker extends Service implements LocationListener {
             if (!isGPSEnabled && !isNetworkEnabled) {
 
             } else {
-                int hasFineLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                int hasFineLocationPermission = ContextCompat.checkSelfPermission(context,
                         Manifest.permission.ACCESS_FINE_LOCATION);
-                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(mContext,
+                int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(context,
                         Manifest.permission.ACCESS_COARSE_LOCATION);
 
                 if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
@@ -75,7 +75,7 @@ public class GpsTracker extends Service implements LocationListener {
                 }
             }
         } catch (Exception e) {
-            Log.d("@@@", "" + e.toString());
+            Log.d("exception :", "" + e.toString());
         }
 
         return location;
