@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +24,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -55,14 +53,12 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap googleMap;
     private GpsTracker gpsTracker;
     private Polyline polylines;
+
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
-    private FusedLocationProviderApi mFusedLocationProviderApi;
-    private boolean mPermissionDenied;
-    private LocationManager locationManager;
     private Marker mCurrentMarker;
     private LatLng startLatLng = new LatLng(0, 0);        //polyline 시작점
     private LatLng endLatLng = new LatLng(0, 0);         //polyline 끝점
