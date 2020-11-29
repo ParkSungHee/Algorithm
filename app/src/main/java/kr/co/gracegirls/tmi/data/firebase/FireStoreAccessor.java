@@ -83,4 +83,26 @@ public class FireStoreAccessor {
     }
 
 
+    public void getMountainShelterList(MountainListListener mountainListListener, String mountainId) {
+        db.collection(FirebaseConfig.SHELTER)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<ShelterListItem> shelterListItems = new ArrayList<>();
+                        for (DocumentSnapshot snap : Objects.requireNonNull(task.getResult())) {
+                            Map<String, Object> shot = snap.getData();
+                            if (mountainId.equals(String.valueOf(shot.get(FirebaseConfig.MOUNTAIN_ID)))) {
+                                String name = String.valueOf(shot.get(FirebaseConfig.NAME));
+                                String address = String.valueOf(shot.get(FirebaseConfig.ADDRESS));
+                                String height = String.valueOf(shot.get(FirebaseConfig.HEIGHT));
+                                String people = String.valueOf(shot.get(FirebaseConfig.PEOPLE));
+                                String latitude = String.valueOf(shot.get(FirebaseConfig.LATITUDE));
+                                String longitude = String.valueOf(shot.get(FirebaseConfig.LONGITUDE));
+                                shelterListItems.add(new ShelterListItem(name, address, latitude, longitude, height, people));
+                            }
+                        }
+                        mountainListListener.setShelterList(shelterListItems);
+                    }
+                });
+    }
 }
