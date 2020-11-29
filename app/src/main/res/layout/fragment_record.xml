@@ -40,6 +40,7 @@
 
 
         <TextView
+            android:id="@+id/killo_distance"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/box1">
 
         <TextView
+            android:id="@+id/calorie_num"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="---\nBPM" />
+            android:text="160\nBPM" />
 
     </LinearLayout>
 

@@ -35,24 +35,8 @@ import android.hardware.SensorManager;
 
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import static android.content.Context.SENSOR_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
-
 
 public class RecordFragment extends Fragment implements OnMapReadyCallback, SensorEventListener {
     private GoogleMap googleMap;
@@ -68,20 +52,24 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
     // 시간 카운터를 위한 변수
     long myBaseTime;
     long myPauseTime;
+    long calTime;
 
     TextView myTime;
-//    TextView myRec;
-//    ImageButton myBtnRec;
+
+    // 거리 계산을 위한 변수
+    TextView myDistance;
 
     // 걸음수를 위한 변수
     TextView myWalkNum; // 걸음수 출력 textview
     private int mSteps = 0; // 현재 걸음 수
     private int mCounterSteps = 0;   // 리스너가 등록되고 난 후의 step count
-
     //센서 연결을 위한 변수
     private SensorManager sensorManager;
     //private Sensor accelerormeterSensor;
     private Sensor stepCountSensor;
+
+    // 칼로리 계산을 위한 변수
+    TextView myCalorie;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -101,18 +89,19 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
         //accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
-        if(stepCountSensor == null){
-            // Toast.makeText(this,"No Step Detect Sensor",Toast.LENGTH_SHORT).show();
-        }
 
         // 카운터 체크용
         myTime = view.findViewById(R.id.time_out);
         myBtnStart = view.findViewById(R.id.btn_start);
-//        myRec = view.findViewById(R.id.record);
-//        myBtnRec =  view.findViewById(R.id.btn_stop);
+
+        // 거리 체크용
+        myDistance=view.findViewById(R.id.killo_distance);
 
         // 걸음 체크용
         myWalkNum = view.findViewById(R.id.walk_num);
+
+        // 칼로리 체크용
+        myCalorie=view.findViewById(R.id.calorie_num);
 
         myBtnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,34 +112,38 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
                         switch(cur_Status){
                             case Init:
                                 myBaseTime = SystemClock.elapsedRealtime();
-                                System.out.println(myBaseTime);
+                                Log.d("time", String.valueOf(myBaseTime));
                                 //myTimer이라는 핸들러를 빈 메세지를 보내서 호출
                                 myTimer.sendEmptyMessage(0);
                                 myBtnStart.setImageResource(R.drawable.icon_pause);
-                                //myBtnRec.setEnabled(true); //기록버튼 활성
                                 cur_Status = Run; //현재상태를 런상태로 변경
+
+                                myDisCheck.sendEmptyMessage(0);
+                                myCalCheck.sendEmptyMessage(0);
                                 break;
                             case Run:
                                 myTimer.removeMessages(0); //핸들러 메세지 제거
+                                // 중지된 시간
                                 myPauseTime = SystemClock.elapsedRealtime();
                                 myBtnStart.setImageResource(R.drawable.icon_start);
-                                //myBtnRec.setText("리셋");
                                 cur_Status = Pause;
+
+                                myCalCheck.removeMessages(0); //핸들러 메세지 제거
                                 break;
                             case Pause:
                                 long now = SystemClock.elapsedRealtime();
                                 myTimer.sendEmptyMessage(0);
                                 myBaseTime += (now- myPauseTime);
                                 myBtnStart.setImageResource(R.drawable.icon_pause);
-                                //myBtnRec.setText("기록");
                                 cur_Status = Run;
+
+                                myCalCheck.sendEmptyMessage(0);
                                 break;
                         }
                         break;
                 }
             }
         });
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.record_map);
@@ -190,11 +183,46 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
     };
     //현재시간을 계속 구해서 출력하는 메소드
     String getTimeOut(){
-        long now = SystemClock.elapsedRealtime(); //애플리케이션이 실행되고나서 실제로 경과된 시간(??)^^;
+        long now = SystemClock.elapsedRealtime(); // 애플리케이션이 실행되고나서 실제로 경과된 시간;
         long outTime = now - myBaseTime;
+        calTime=outTime;
         String easy_outTime = String.format("%02d:%02d:%02d", (outTime/1000/60)/60, (outTime/1000)/60,(outTime/1000)%60);
         return easy_outTime;
 
+    }
+
+    // 거리 체크용
+    Handler myDisCheck = new Handler(){
+        public void handleMessage(Message msg){
+            myDistance.setText(getDistance()+"\n킬로미터");
+
+            // sendEmptyMessage 는 비어있는 메세지를 Handler 에게 전송하는겁니다.
+            myDisCheck.sendEmptyMessage(0);
+        }
+    };
+    //현재시간을 계속 구해서 출력하는 메소드
+    String getDistance(){
+        int outDistance = mSteps/15;
+        String disFormat = String.format("%1d.%1d%1d", outDistance/100, outDistance/10, outDistance%10);
+
+        return disFormat;
+    }
+
+    // 칼로리 체크용
+    Handler myCalCheck = new Handler(){
+        public void handleMessage(Message msg){
+            myCalorie.setText(getCalorie()+"\n칼로리");
+
+            // sendEmptyMessage 는 비어있는 메세지를 Handler 에게 전송하는겁니다.
+            myCalCheck.sendEmptyMessage(0);
+        }
+    };
+    //현재시간을 계속 구해서 출력하는 메소드
+    String getCalorie(){
+        int outCalorie = (int)calTime/1000/11;
+        String calFormat = String.format("%d", outCalorie);
+
+        return calFormat;
     }
 
     // 걸음 수 체크용 함수들
@@ -218,18 +246,14 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
 
             //stepcountsenersor는 앱이 꺼지더라도 초기화 되지않는다. 그러므로 우리는 초기값을 가지고 있어야한다.
             if (mCounterSteps < 1) {
-                // initial value
+                // 초기 값
                 mCounterSteps = (int) event.values[0];
             }
 
-            //리셋 안된 값 + 현재값 - 리셋 안된 값
+            // (리셋 안된 값 + 현재값) - 리셋 안된 값
             mSteps = (int) event.values[0] - mCounterSteps;
             myWalkNum.setText(Integer.toString(mSteps)+"\n걸음");
             Log.i("log: ", "New step detected by STEP_COUNTER sensor. Total step count: " + mSteps );
-
-//            if (cur_Status==Run) {
-//
-//            }
         }
 
     }
