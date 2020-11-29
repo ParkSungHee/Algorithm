@@ -90,180 +90,150 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
+        //TODO - 동적으로 바꾸어야함
         LatLng seunghack = new LatLng(37.44237920148298, 126.68814372688384);
 
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(seunghack);
-        markerOptions1.title("승학산");
+        MarkerOptions seunghackMarker = new MarkerOptions();
+        seunghackMarker.position(seunghack);
+        seunghackMarker.title("승학산");
 
 
-        BitmapDrawable bitmapdraw1=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
-        Bitmap b1=bitmapdraw1.getBitmap();
-        Bitmap smallMarker1 = Bitmap.createScaledBitmap(b1, 100, 100, false);
-        markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(smallMarker1));
+        BitmapDrawable bitmapdraw_seunghack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        Bitmap b_seunghack=bitmapdraw_seunghack.getBitmap();
+        Bitmap smallMarker_seunghack = Bitmap.createScaledBitmap(b_seunghack, 100, 100, false);
+        seunghackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seunghack));
 
 
-        googleMap.addMarker(markerOptions1);
+        googleMap.addMarker(seunghackMarker);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(seunghack));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         LatLng munhack = new LatLng(37.43297284354754, 126.67936844300222);
 
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(munhack);
-        markerOptions2.title("문학산");
+        MarkerOptions munhackMarker = new MarkerOptions();
+        munhackMarker.position(munhack);
+        munhackMarker.title("문학산");
 
 
-        BitmapDrawable bitmapdraw2=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
-        Bitmap b2=bitmapdraw2.getBitmap();
-        Bitmap smallMarker2 = Bitmap.createScaledBitmap(b2, 100, 100, false);
-        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(smallMarker2));
+        BitmapDrawable bitmapdraw_munhack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        Bitmap b_munhack=bitmapdraw_munhack.getBitmap();
+        Bitmap smallMarker_munhack = Bitmap.createScaledBitmap(b_munhack, 100, 100, false);
+        munhackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_munhack));
 
 
-        googleMap.addMarker(markerOptions2);
+        googleMap.addMarker(munhackMarker);
 
         LatLng subong = new LatLng(37.459951290094594, 126.66331831339058);
 
-        MarkerOptions markerOptions3 = new MarkerOptions();
-        markerOptions3.position(subong);
-        markerOptions3.title("수봉산");
+        MarkerOptions subongMarker = new MarkerOptions();
+        subongMarker.position(subong);
+        subongMarker.title("수봉산");
 
 
-        BitmapDrawable bitmapdraw3=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
-        Bitmap b3=bitmapdraw3.getBitmap();
-        Bitmap smallMarker3 = Bitmap.createScaledBitmap(b3, 100, 100, false);
-        markerOptions3.icon(BitmapDescriptorFactory.fromBitmap(smallMarker3));
+        BitmapDrawable bitmapdraw_subong=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_subong=bitmapdraw_subong.getBitmap();
+        Bitmap smallMarker_subong = Bitmap.createScaledBitmap(b_subong, 100, 100, false);
+        subongMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_subong));
 
 
-        googleMap.addMarker(markerOptions3);
+        googleMap.addMarker(subongMarker);
 
         LatLng chung = new LatLng(37.42161694299056, 126.65797311321575);
 
-        MarkerOptions markerOptions4 = new MarkerOptions();
-        markerOptions4.position(chung);
-        markerOptions4.title("청량산");
+        MarkerOptions chungMarker = new MarkerOptions();
+        chungMarker.position(chung);
+        chungMarker.title("청량산");
 
 
-        BitmapDrawable bitmapdraw4=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
-        Bitmap b4=bitmapdraw4.getBitmap();
-        Bitmap smallMarker4 = Bitmap.createScaledBitmap(b4, 100, 100, false);
-        markerOptions4.icon(BitmapDescriptorFactory.fromBitmap(smallMarker4));
+        BitmapDrawable bitmapdraw_chung=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_chung=bitmapdraw_chung.getBitmap();
+        Bitmap smallMarker_chung = Bitmap.createScaledBitmap(b_chung, 100, 100, false);
+        chungMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_chung));
 
 
-        googleMap.addMarker(markerOptions4);
+        googleMap.addMarker(chungMarker);
 
         LatLng jubong = new LatLng(38.17428213313527, 128.54178643183315);
 
-        MarkerOptions markerOptions5 = new MarkerOptions();
-        markerOptions5.position(jubong);
-        markerOptions5.title("주봉산");
+        MarkerOptions jubongMarker = new MarkerOptions();
+        jubongMarker.position(jubong);
+        jubongMarker.title("주봉산");
 
 
-        BitmapDrawable bitmapdraw5=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
-        Bitmap b5=bitmapdraw5.getBitmap();
-        Bitmap smallMarker5 = Bitmap.createScaledBitmap(b5, 100, 100, false);
-        markerOptions5.icon(BitmapDescriptorFactory.fromBitmap(smallMarker5));
+        BitmapDrawable bitmapdraw_jubong=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_jubong=bitmapdraw_jubong.getBitmap();
+        Bitmap smallMarker_jubong = Bitmap.createScaledBitmap(b_jubong, 100, 100, false);
+        jubongMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_jubong));
 
 
-        googleMap.addMarker(markerOptions5);
+        googleMap.addMarker(jubongMarker);
 
         LatLng seolak = new LatLng(38.17744047805365, 128.49960343368417);
 
-        MarkerOptions markerOptions6 = new MarkerOptions();
-        markerOptions6.position(seolak);
-        markerOptions6.title("설악산");
+        MarkerOptions seolakMarker = new MarkerOptions();
+        seolakMarker.position(seolak);
+        seolakMarker.title("설악산");
 
 
-        BitmapDrawable bitmapdraw6=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
-        Bitmap b6=bitmapdraw6.getBitmap();
-        Bitmap smallMarker6 = Bitmap.createScaledBitmap(b6, 100, 100, false);
-        markerOptions6.icon(BitmapDescriptorFactory.fromBitmap(smallMarker6));
+        BitmapDrawable bitmapdraw_seolak=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_seolak=bitmapdraw_seolak.getBitmap();
+        Bitmap smallMarker_seolak = Bitmap.createScaledBitmap(b_seolak, 100, 100, false);
+        seolakMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seolak));
 
 
-        googleMap.addMarker(markerOptions6);
+        googleMap.addMarker(seolakMarker);
 
         LatLng chungdae = new LatLng(38.179900855708034, 128.56960158530646);
 
-        MarkerOptions markerOptions7 = new MarkerOptions();
-        markerOptions7.position(chungdae);
-        markerOptions7.title("청대산");
+        MarkerOptions chungdaeMarker = new MarkerOptions();
+        chungdaeMarker.position(chungdae);
+        chungdaeMarker.title("청대산");
 
 
-        BitmapDrawable bitmapdraw7=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
-        Bitmap b7=bitmapdraw7.getBitmap();
-        Bitmap smallMarker7 = Bitmap.createScaledBitmap(b7, 100, 100, false);
-        markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(smallMarker7));
+        BitmapDrawable bitmapdraw_chungdae=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        Bitmap b_chungdae=bitmapdraw_chungdae.getBitmap();
+        Bitmap smallMarker_chungdae = Bitmap.createScaledBitmap(b_chungdae, 100, 100, false);
+        chungdaeMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_chungdae));
 
 
-        googleMap.addMarker(markerOptions7);
+        googleMap.addMarker(chungdaeMarker);
 
         LatLng gucksa = new LatLng(38.222634396570406, 128.56193099467598);
 
-        MarkerOptions markerOptions8 = new MarkerOptions();
-        markerOptions8.position(gucksa);
-        markerOptions8.title("국사봉");
+        MarkerOptions gucksaMarker = new MarkerOptions();
+        gucksaMarker.position(gucksa);
+        gucksaMarker.title("국사봉");
 
 
-        BitmapDrawable bitmapdraw8=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
-        Bitmap b8=bitmapdraw8.getBitmap();
-        Bitmap smallMarker8 = Bitmap.createScaledBitmap(b8, 100, 100, false);
-        markerOptions8.icon(BitmapDescriptorFactory.fromBitmap(smallMarker8));
+        BitmapDrawable bitmapdraw_gucksa=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_gucksa=bitmapdraw_gucksa.getBitmap();
+        Bitmap smallMarker_gucksa = Bitmap.createScaledBitmap(b_gucksa, 100, 100, false);
+        gucksaMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_gucksa));
 
 
-        googleMap.addMarker(markerOptions8);
+        googleMap.addMarker(gucksaMarker);
 
         LatLng hanra = new LatLng(33.36302691656733, 126.52950980078691);
 
-        MarkerOptions markerOptions9 = new MarkerOptions();
-        markerOptions9.position(hanra);
-        markerOptions9.title("한라산");
+        MarkerOptions hanraMarker = new MarkerOptions();
+        hanraMarker.position(hanra);
+        hanraMarker.title("한라산");
 
 
-        BitmapDrawable bitmapdraw9=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
-        Bitmap b9=bitmapdraw9.getBitmap();
-        Bitmap smallMarker9 = Bitmap.createScaledBitmap(b9, 100, 100, false);
-        markerOptions9.icon(BitmapDescriptorFactory.fromBitmap(smallMarker9));
+        BitmapDrawable bitmapdraw_hanra=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
+        Bitmap b_hanra=bitmapdraw_hanra.getBitmap();
+        Bitmap smallMarker_hanra = Bitmap.createScaledBitmap(b_hanra, 100, 100, false);
+        hanraMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_hanra));
 
 
-        googleMap.addMarker(markerOptions9);
+        googleMap.addMarker(hanraMarker);
 
-       // googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.44184293474863, 126.66703827786698)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(hanra));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.44184293474863, 126.66703827786698)));
+       // googleMap.moveCamera(CameraUpdateFactory.newLatLng(hanra));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
-        //TODO - 동적으로 바꾸어야함
-        /*final LatLng munhack = new LatLng(37.43297284354754, 126.67936844300222);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(munhack));
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10));
-
-        //ImageView img = (ImageView)findViewById(R.id.image);
-        Resources res = getResources();
-        Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.danger);
-        Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap, 1,1,false);
 
 
-        Marker marker = this.googleMap.addMarker(new MarkerOptions()
-                .position(munhack)
-                .title("문학산"));
-
-        Marker marker1 = this.googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.44237920148298, 126.68814372688384))
-                .title("승학산"));
-
-        Marker subong = this.googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.459951290094594, 126.66331831339058))
-                .title("수봉산"));
-
-        Marker marker3 = this.googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.42161694299056, 126.65797311321575))
-                .title("청량산"));
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            this.googleMap.setMyLocationEnabled(true);
-        } else {
-            checkLocationPermissionWithRationale();
-        }
-
-*/
     }
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
