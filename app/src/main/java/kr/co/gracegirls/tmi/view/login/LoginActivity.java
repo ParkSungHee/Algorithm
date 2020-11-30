@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.SignInButton;
@@ -14,6 +16,7 @@ import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.view.common.MainActivity;
 import kr.co.gracegirls.tmi.view.signup.SignUpActivity;
+import kr.co.gracegirls.tmi.view.signup.SignUpDoneActivity;
 
 import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_ACTIVITY_STATUS;
 import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_FROM_SPLASH;
@@ -21,6 +24,8 @@ import static kr.co.gracegirls.tmi.view.common.CommonConfig.START_FROM_SPLASH;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context context = this;
+
+    EditText emailInput, passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.signUpText).setOnClickListener(this);
 
+        emailInput=findViewById(R.id.emailInput);
+        passwordInput=findViewById(R.id.passwordInput);
     }
 
     @Override
@@ -58,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.loginButton:
                 Toast.makeText(context, "로그인", Toast.LENGTH_SHORT).show();
+                startMainActivity();
                 break;
 
             case R.id.signUpText:

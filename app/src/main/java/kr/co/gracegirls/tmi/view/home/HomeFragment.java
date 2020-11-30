@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         seunghackMarker.title("승학산");
 
 
-        BitmapDrawable bitmapdraw_seunghack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        BitmapDrawable bitmapdraw_seunghack=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
         Bitmap b_seunghack=bitmapdraw_seunghack.getBitmap();
         Bitmap smallMarker_seunghack = Bitmap.createScaledBitmap(b_seunghack, 100, 100, false);
         seunghackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seunghack));
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         munhackMarker.title("문학산");
 
 
-        BitmapDrawable bitmapdraw_munhack=(BitmapDrawable)getResources().getDrawable(R.drawable.danger);
+        BitmapDrawable bitmapdraw_munhack=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
         Bitmap b_munhack=bitmapdraw_munhack.getBitmap();
         Bitmap smallMarker_munhack = Bitmap.createScaledBitmap(b_munhack, 100, 100, false);
         munhackMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_munhack));
@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         jubongMarker.title("주봉산");
 
 
-        BitmapDrawable bitmapdraw_jubong=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        BitmapDrawable bitmapdraw_jubong=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
         Bitmap b_jubong=bitmapdraw_jubong.getBitmap();
         Bitmap smallMarker_jubong = Bitmap.createScaledBitmap(b_jubong, 100, 100, false);
         jubongMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_jubong));
@@ -184,7 +184,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         seolakMarker.title("설악산");
 
 
-        BitmapDrawable bitmapdraw_seolak=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        BitmapDrawable bitmapdraw_seolak=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
         Bitmap b_seolak=bitmapdraw_seolak.getBitmap();
         Bitmap smallMarker_seolak = Bitmap.createScaledBitmap(b_seolak, 100, 100, false);
         seolakMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_seolak));
@@ -199,7 +199,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         chungdaeMarker.title("청대산");
 
 
-        BitmapDrawable bitmapdraw_chungdae=(BitmapDrawable)getResources().getDrawable(R.drawable.watchout);
+        BitmapDrawable bitmapdraw_chungdae=(BitmapDrawable)getResources().getDrawable(R.drawable.safe);
         Bitmap b_chungdae=bitmapdraw_chungdae.getBitmap();
         Bitmap smallMarker_chungdae = Bitmap.createScaledBitmap(b_chungdae, 100, 100, false);
         chungdaeMarker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker_chungdae));
