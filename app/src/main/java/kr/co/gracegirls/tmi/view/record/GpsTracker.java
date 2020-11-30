@@ -19,6 +19,7 @@ public class GpsTracker extends Service implements LocationListener {
     Location location;
     double latitude;
     double longitude;
+    double altitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
@@ -95,6 +96,13 @@ public class GpsTracker extends Service implements LocationListener {
         }
 
         return longitude;
+    }
+
+    public double getAltitude(){
+        if (location != null) {
+            altitude = location.getAltitude();
+        }
+        return altitude;
     }
 
     @Override

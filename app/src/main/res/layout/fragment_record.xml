@@ -40,27 +40,27 @@
 
 
         <TextView
-            android:id="@+id/killo_distance"
+            android:id="@+id/start_time"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0.00\n킬로미터" />
+            android:text="00:00\n출발시각" />
 
         <TextView
-            android:id="@+id/walk_num"
+            android:id="@+id/point_altitude"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0\n걸음" />
+            android:text="0\n고도(m)" />
 
         <TextView
             android:id="@+id/time_out"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.59"
+            android:layout_weight="0.45"
             android:text="00:00:00\n시간" />
 
     </LinearLayout>
@@ -76,26 +76,28 @@
         app:layout_constraintTop_toBottomOf="@id/box1">
 
         <TextView
+            android:id="@+id/killo_distance"
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.59"
+            android:text="0.00\n킬로미터" />
+
+        <TextView
+            android:id="@+id/walk_num"
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0\n걸음" />
+
+        <TextView
             android:id="@+id/calorie_num"
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.65"
             android:text="0\n칼로리" />
-
-        <TextView
-            style="@style/CommonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0m\n고도" />
-
-        <TextView
-            style="@style/CommonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="160\nBPM" />
 
     </LinearLayout>
 
