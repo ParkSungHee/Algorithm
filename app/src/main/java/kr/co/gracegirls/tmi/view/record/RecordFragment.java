@@ -91,7 +91,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
     // 고도 위한 변수
     TextView myAltitude;
-    double altitude;
+    private double altitude;
 
     // 시간 카운터를 위한 변수
     long myBaseTime;
@@ -222,15 +222,6 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                     .build();
         }
         createLocationRequest();
-
-
-//        ImageButton start_button = view.findViewById(R.id.btn_start);
-//        start_button.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                changeWalkState();        //걸음 상태 변경
-//            }
-//        });
 
         return view;
     }
