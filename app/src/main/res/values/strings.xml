@@ -9,7 +9,7 @@
     <string name="appName">T M I</string>
     <string name="search">검색</string>
     <string name="search_hint">지역명 또는 산이름</string>
-    <string name="list_title_text">선택한 지역의 산 목록</string>
+    <string name="list_title_text">산 List</string>
     <string name="list_title_hint">(위험지수 낮은 순)</string>
     <string name="mountain_name_temp">아차산</string>
     <string name="risk_title">오늘의 산악사고 위험지수</string>
@@ -17,7 +17,7 @@
     <string name="current_location_lat">위도</string>
     <string name="current_location_lng">경도</string>
     <string name="moutain_name">산이름</string>
-    <string name="list_shelter_text">대피소 목록</string>
+    <string name="list_shelter_text">대피소 List</string>
     <string name="list_shelter_hint">(선택한 산에 있는 대피소 목록)</string>
     <string name="shelter_name_temp">양폭 대피소</string>
     <string name="email">이메일</string>
