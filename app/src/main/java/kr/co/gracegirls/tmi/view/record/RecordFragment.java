@@ -45,6 +45,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import android.content.Context;
@@ -82,6 +84,14 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
     int cur_Status = Init; // 현재의 상태를 저장할변수를 초기화함.
     ImageButton myBtnStart; // 시작 버튼
+
+    // 처음 버튼 선택 시 시 가져오기 위한 변수
+    TextView myStart;
+    long start;
+
+    // 고도 위한 변수
+    TextView myAltitude;
+    private double altitude;
 
     // 시간 카운터를 위한 변수
     long myBaseTime;
@@ -123,6 +133,11 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
         //accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
+        // 시각 체크용
+        myStart=view.findViewById(R.id.start_time);
+
+        // 고도 체크용
+        myAltitude=view.findViewById(R.id.point_altitude);
 
         // 카운터 체크용
         myTime = view.findViewById(R.id.time_out);
@@ -152,6 +167,19 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                                 myBtnStart.setImageResource(R.drawable.icon_pause);
                                 cur_Status = Run; //현재상태를 런상태로 변경
 
+                                // 처음 시작 버튼 눌렀을 때 시각 가져오기(함수 따로 안빼고 여기 바로 구현)
+                                start=System.currentTimeMillis();
+                                Date date=new Date(start);
+                                SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
+                                String getTime=sdf.format(date);
+                                myStart.setText(getTime+"\n출발시각");
+
+                                changeWalkState();
+
+                                // 고도 표시
+                                String check= String.format("%.2f", altitude);
+                                myAltitude.setText(check+"\n고도(m)");
+
                                 myDisCheck.sendEmptyMessage(0);
                                 myCalCheck.sendEmptyMessage(0);
                                 break;
@@ -163,6 +191,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                                 cur_Status = Pause;
 
                                 myCalCheck.removeMessages(0); //핸들러 메세지 제거
+                                changeWalkState();
                                 break;
                             case Pause:
                                 long now = SystemClock.elapsedRealtime();
@@ -172,6 +201,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                                 cur_Status = Run;
 
                                 myCalCheck.sendEmptyMessage(0);
+                                changeWalkState();
                                 break;
                         }
                         break;
@@ -193,15 +223,6 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
         }
         createLocationRequest();
 
-
-        ImageButton start_button = view.findViewById(R.id.btn_start);
-        start_button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeWalkState();        //걸음 상태 변경
-            }
-        });
-
         return view;
     }
     private void changeWalkState(){
@@ -210,9 +231,10 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
+            altitude = gpsTracker.getAltitude();
             String address = getCurrentAddress(latitude, longitude);
 
-            Toast.makeText(getActivity(), "현재위치 \n위도 " + latitude + "\n경도 " + longitude +"\n위치 "+address, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "현재위치 \n위도 " + latitude + "\n경도 " + longitude + "\n고도" + altitude +"\n위치 "+address, Toast.LENGTH_LONG).show();
 
             startLatLng = new LatLng(latitude, longitude);  //현재 위치를 시작점으로 설정
             walkState = true;
@@ -276,6 +298,9 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude(), longtitude = location.getLongitude();
+        altitude=location.getAltitude();
+        String check= String.format("%.2f", altitude);
+        myAltitude.setText(check+"\n고도(m)");
 
         if (currentMarker != null) currentMarker.remove();
         currentLocation = location;
@@ -317,7 +342,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
-    
+
     public String getCurrentAddress( double latitude, double longitude) {
 
         //지오코더 - GPS를 주소로 변환
@@ -382,6 +407,18 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
         return easy_outTime;
 
     }
+
+    // 고도 체크용
+    Handler myAlti = new Handler(){
+        public void handleMessage(Message msg){
+            myAltitude.setText(altitude+"\n고도(m)");
+            String check= String.valueOf(altitude);
+            Log.e("고도", check);
+
+            //sendEmptyMessage 는 비어있는 메세지를 Handler 에게 전송하는겁니다.
+            myAlti.sendEmptyMessage(0);
+        }
+    };
 
     // 거리 체크용
     Handler myDisCheck = new Handler(){

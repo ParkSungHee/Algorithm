@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,9 +59,9 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
         mountainTitle.setText("위험지수 : " + data.getRiskPoint());
 
-        if (Integer.parseInt(data.getRiskPoint()) <= 5) {
+        if (Double.parseDouble(data.getRiskPoint()) <= 75.0) {
             imageView.setImageResource(R.drawable.icon_safe);
-        } else if (Integer.parseInt(data.getRiskPoint()) <= 10) {
+        } else if (Double.parseDouble(data.getRiskPoint()) < 80.0) {
             imageView.setImageResource(R.drawable.icon_caution);
         } else {
             imageView.setImageResource(R.drawable.icon_danger);
