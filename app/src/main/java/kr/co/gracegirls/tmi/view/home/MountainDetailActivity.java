@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.data.firebase.FirebaseConfig;
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.view.common.CommonConfig;
+import kr.co.gracegirls.tmi.view.home.mountainshelter.MountainShelterActivity;
 
 public class MountainDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,6 +69,17 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.show_shelter:
+                startMountainShelterListActivity();
+                break;
+        }
 
+    }
+
+    private void startMountainShelterListActivity() {
+        Intent intent = new Intent(this, MountainShelterActivity.class);
+        intent.putExtra(FirebaseConfig.MOUNTAIN_ID, data.getDocumentID());
+        startActivity(intent);
     }
 }
