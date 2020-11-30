@@ -296,7 +296,4 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         arrayPoints.add(latLng);
         arrayMarkerOptions.add(markerOptions);
     }
-
-
-
 }

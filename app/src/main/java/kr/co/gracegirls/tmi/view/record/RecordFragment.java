@@ -1,9 +1,15 @@
 package kr.co.gracegirls.tmi.view.record;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Bundle;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -11,35 +17,63 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import android.content.Context;
-import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-
-import com.google.android.gms.maps.OnMapReadyCallback;
 
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
+import kr.co.gracegirls.tmi.util.PermissionUtils;
 
-public class RecordFragment extends Fragment implements OnMapReadyCallback, SensorEventListener {
+
+public class RecordFragment extends Fragment implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        LocationListener, SensorEventListener {
     private GoogleMap googleMap;
+    private GpsTracker gpsTracker;
+    private Polyline polylines;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
+    private Location currentLocation;
+    private Marker currentMarker;
+    private LatLng startLatLng = new LatLng(0, 0);        //polyline 시작점
+    private LatLng endLatLng = new LatLng(0, 0);         //polyline 끝점
+    private boolean walkState = false;                          //걸음 상태
+
 
     // 버튼 초기, 실행, 중지 상태 표시
     final static int Init =0;
@@ -150,25 +184,183 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
 
         mapFragment.getMapAsync(this);
 
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(getActivity())
+                    .addApi(LocationServices.API)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
+        createLocationRequest();
+
+
+        ImageButton start_button = view.findViewById(R.id.btn_start);
+        start_button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeWalkState();        //걸음 상태 변경
+            }
+        });
+
         return view;
     }
+    private void changeWalkState(){
+        if(!walkState) {
+            gpsTracker = new GpsTracker(getActivity());
 
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            String address = getCurrentAddress(latitude, longitude);
 
+            Toast.makeText(getActivity(), "현재위치 \n위도 " + latitude + "\n경도 " + longitude +"\n위치 "+address, Toast.LENGTH_LONG).show();
+
+            startLatLng = new LatLng(latitude, longitude);  //현재 위치를 시작점으로 설정
+            walkState = true;
+        }else{
+            walkState = false;
+        }
+    }
+
+    private void drawPath(){        //polyline을 그려주는 메소드
+        PolylineOptions line = new PolylineOptions()
+                .add(startLatLng).add(endLatLng)
+                .width(5)
+                .color(Color.RED);
+        polylines = googleMap.addPolyline(line);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLatLng, 18));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+
+        // 걸음 수 체크용 함수들
+        if(stepCountSensor !=null){
+            //센서의 속도 설정
+            sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_GAME);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        googleApiClient.disconnect();
+
+        if(sensorManager!=null){
+            sensorManager.unregisterListener(this);
+        }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+    }
 
-        final LatLng center = new LatLng(35.1434021, 126.7988363);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            return;
+        }
 
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(center).zoom(15).build();
-        this.googleMap.moveCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition));
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+            // 권한이 부여 된 경우 내 위치 레이어를 활성화
+            enableMyLocation();
+        } else {
+            // fragment 다시 시작될 때 누락 된 권한 오류를 error dialog 표시
+        }
+    }
+    @Override
+    public void onLocationChanged(Location location) {
+        double latitude = location.getLatitude(), longtitude = location.getLongitude();
 
-        Marker marker = this.googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(35.1434021, 126.7988363))
-                .title("광주소프트웨어마이스터고등학교"));
+        if (currentMarker != null) currentMarker.remove();
+        currentLocation = location;
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(latitude, longtitude));
+        currentMarker =  googleMap.addMarker(markerOptions);
+
+
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), 18));
+        if(walkState){  //걸음 시작 버튼이 눌렸을 때
+            endLatLng = new LatLng(latitude, longtitude);        //현재 위치를 끝점으로 설정
+            drawPath();                                            //polyline 그리기
+            startLatLng = new LatLng(latitude, longtitude);        //시작점을 끝점으로 다시 설정
+        }
+    }
+
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionUtils.requestPermission((AppCompatActivity) getActivity(), LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        } else if (googleMap != null) {
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            // Start location updates.
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    googleApiClient, locationRequest, this);
+
+            if (currentLocation != null) {
+                Log.i("Location", "Latitude: " + currentLocation.getLatitude()
+                        + ", Longitude: " + currentLocation.getLongitude());
+            }
+        }
+    }
+    protected void createLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+    
+    public String getCurrentAddress( double latitude, double longitude) {
+
+        //지오코더 - GPS를 주소로 변환
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
+        List<Address> addresses;
+
+        try {
+
+            addresses = geocoder.getFromLocation(
+                    latitude,
+                    longitude,
+                    7);
+        } catch (IOException ioException) { //네트워크 문제
+            Toast.makeText(getActivity(), "위치값을 위도, 경도로 표시할 수 없습니다", Toast.LENGTH_LONG).show();
+            return "위치값을 위도, 경도로 표시할 수 없습니다";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(getActivity(), "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+        }
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(getActivity(), "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
+        }
+
+        Address address = addresses.get(0);
+        return address.getAddressLine(0).toString()+"\n";
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        enableMyLocation();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
 
@@ -223,21 +415,6 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback, Sens
         String calFormat = String.format("%d", outCalorie);
 
         return calFormat;
-    }
-
-    // 걸음 수 체크용 함수들
-    public void onStart() {
-        super.onStart();
-        if(stepCountSensor !=null){
-            //센서의 속도 설정
-            sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_GAME);
-        }
-    }
-    public void onStop(){
-        super.onStop();
-        if(sensorManager!=null){
-            sensorManager.unregisterListener(this);
-        }
     }
 
     @Override
