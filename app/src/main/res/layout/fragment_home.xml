@@ -93,18 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_map" />
 
-    <TextView
-        android:id="@+id/list_title_hint"
-        style="@style/CommonText.Black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_20dp"
-        android:text="@string/list_title_hint"
-        android:textAlignment="textStart"
-        android:textSize="@dimen/common_margin_13dp"
-        app:layout_constraintBottom_toBottomOf="@id/list_title"
-        app:layout_constraintStart_toEndOf="@id/list_title" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
