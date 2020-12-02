@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,8 +24,10 @@ import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
+import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.data.item.ShelterListItem;
 import kr.co.gracegirls.tmi.module.TitleBar;
+import kr.co.gracegirls.tmi.view.home.HomeMountainAdapter;
 
 public class ShelterFragment extends Fragment implements OnMapReadyCallback {
 
@@ -34,6 +37,8 @@ public class ShelterFragment extends Fragment implements OnMapReadyCallback {
     private List<ShelterListItem> shelterListItems;
     private ShelterListListener shelterListListener;
     private FireStoreAccessor fireStoreAccessor = new FireStoreAccessor();
+
+    private ImageButton shelterSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,8 +50,19 @@ public class ShelterFragment extends Fragment implements OnMapReadyCallback {
 
         recyclerView = view.findViewById(R.id.shelter_list);
 
+        shelterSearch=view.findViewById(R.id.search_button);
 
-        initShelterList();
+        // 검색용
+        shelterSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initShelterList();
+                //fireStoreAccessor.getMountainInformation(mountainListListener);
+            }
+        });
+
+
+        //initShelterList();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.shelter_map);
@@ -60,7 +76,14 @@ public class ShelterFragment extends Fragment implements OnMapReadyCallback {
         shelterListListener = new ShelterListListener() {
             @Override
             public void setShelterList(ArrayList<ShelterListItem> shelterListItems) {
-                shelterListAdapter = new ShelterListAdapter(shelterListItems);
+                List<ShelterListItem> shelterListItems2=new ArrayList<>();
+                shelterListItems2.add(shelterListItems.get(0));
+                shelterListItems2.add(shelterListItems.get(5));
+                shelterListItems2.add(shelterListItems.get(6));
+                shelterListItems2.add(shelterListItems.get(8));
+                shelterListItems2.add(shelterListItems.get(9));
+
+                shelterListAdapter = new ShelterListAdapter(shelterListItems2);
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(shelterListAdapter);
             }

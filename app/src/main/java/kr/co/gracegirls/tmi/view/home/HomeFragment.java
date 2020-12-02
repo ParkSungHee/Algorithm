@@ -2,20 +2,28 @@ package kr.co.gracegirls.tmi.view.home;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +36,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kr.co.gracegirls.tmi.R;
@@ -52,6 +62,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     private MountainListListener mountainListListener;
     private FireStoreAccessor fireStoreAccessor = new FireStoreAccessor();
 
+    // 날짜 선택용 변수
+    private DatePickerDialog.OnDateSetListener callBackMethodDate;
+    private TextView datePick;
+    // 시간 선택용 변수
+    private TimePickerDialog.OnTimeSetListener callBackMethodTime;
+    private TextView timePick;
+
+    // 검색용 변수
+    private ImageButton mntSearch;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -62,6 +82,59 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         initMountainList();
         fireStoreAccessor.getMountainInformation(mountainListListener);
+
+        // 검색 선언
+        mntSearch=view.findViewById(R.id.search_button);
+
+        // 날짜, 시간 초기화
+        datePick = view.findViewById(R.id.date_button);
+        timePick = view.findViewById(R.id.time_button);
+
+        // 현재 날짜, 시각
+        long start=System.currentTimeMillis();
+        Date date=new Date(start);
+        SimpleDateFormat sdfd=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdft=new SimpleDateFormat("kk:mm");
+        String getDate=sdfd.format(date);
+        String getTime=sdft.format(date);
+        datePick.setText("Date: "+getDate);
+        timePick.setText("Time: "+getTime);
+
+        // 검색용
+        mntSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initMountainList2();
+                fireStoreAccessor.getMountainInformation(mountainListListener);
+            }
+        });
+
+        // 날짜 선택용
+        this.InitializeListenerDate();
+        datePick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] date=getDate.split("-");
+                String year=date[0];
+                String month=date[1];
+                String day=date[2];
+                DatePickerDialog dialog=new DatePickerDialog(getContext(), callBackMethodDate, Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(day));
+                dialog.show();
+            }
+        });
+
+        // 시간 선택용
+        this.InitializeListenerTime();
+        timePick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] time=getTime.split(":");
+                String hour=time[0];
+                String min=time[1];
+                TimePickerDialog dialog=new TimePickerDialog(getContext(), callBackMethodTime, Integer.parseInt(hour), Integer.parseInt(min), true);
+                dialog.show();
+            }
+        });
 
 
         // BitmapDescriptorFactory 생성하기 위한 소스
@@ -75,6 +148,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         return view;
     }
 
+    // datedialog에서 선택한 날짜 출력
+    public void InitializeListenerDate() {
+        callBackMethodDate=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                datePick.setText(String.format("Date: %04d-%02d-%02d", year, month+1, date));
+            }
+        };
+    }
+
+    // timedialog에서 선택한 시간 출력
+    public void InitializeListenerTime() {
+        callBackMethodTime=new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int min) {
+                timePick.setText(String.format("Time: %02d:%02d", hour, min));
+            }
+        };
+    }
+
     private void initMountainList() {
         mountainListItems = new ArrayList<>();
 
@@ -86,6 +179,34 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(homeMountainAdapter);
             }
+
+            @Override
+            public void setShelterList(ArrayList<ShelterListItem> shelterListItems) {
+            }
+        };
+    }
+
+    private void initMountainList2() {
+        mountainListItems = new ArrayList<>();
+
+        mountainListListener = new MountainListListener() {
+
+            @Override
+            public void setMountainList(ArrayList<MountainListItem> mountainListItem) {
+                mountainListItems = mountainListItem;
+                List<MountainListItem> mountainListItems2=new ArrayList<>();
+                //mountainListItems2.add(mountainListItems.get(2));
+
+                mountainListItems2.add(mountainListItems.get(0));
+                mountainListItems2.add(mountainListItems.get(3));
+                mountainListItems2.add(mountainListItems.get(11));
+                mountainListItems2.add(mountainListItems.get(16));
+
+                homeMountainAdapter = new HomeMountainAdapter(getContext(), mountainListItems2);
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerView.setAdapter(homeMountainAdapter);
+            }
+
 
             @Override
             public void setShelterList(ArrayList<ShelterListItem> shelterListItems) {
