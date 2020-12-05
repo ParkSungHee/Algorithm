@@ -139,6 +139,7 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
     private void startWeatherInfoActivity(){
         Intent intent = new Intent(this, WeatherInfoActivity.class);
+        intent.putExtra("mountainName", data.getName());
         startActivity(intent);
     }
 }
