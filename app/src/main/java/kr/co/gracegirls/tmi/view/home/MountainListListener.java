@@ -1,4 +1,6 @@
-package kr.co.gracegirls.tmi.view.home;/*
+package kr.co.gracegirls.tmi.view.home;
+
+/*
  * Created by JJJoonngg
  */
 

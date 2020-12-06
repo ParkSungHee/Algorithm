@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,72 +21,132 @@
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="70dp"
-        android:text="산명 : 설악산"
-        app:layout_constraintStart_toStartOf="@id/mountain_pic"
+        android:text="산명 : "
+        app:layout_constraintStart_toStartOf="@id/mountain_image"
+        app:layout_constraintTop_toBottomOf="@id/mountain_info_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/mountain_name_text"
+        style="@style/CommonText.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toEndOf="@id/mountain_name"
         app:layout_constraintTop_toBottomOf="@id/mountain_info_title"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/mountain_pic"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:id="@+id/mountain_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:src="@drawable/sulak"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mountain_info_title" />
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mountain_image">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mountain_pic">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/mnt_loc"
-                style="@style/CommonText.Black"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:padding="5dp"
-                android:paddingStart="30dp"
-                android:text="소재지 : 강원도 속초시 설악동"
-                android:textAlignment="viewStart" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/mnt_height"
-                style="@style/CommonText.Black"
+
+                <TextView
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp"
+                    android:paddingStart="30dp"
+                    android:text="소재지 :"
+                    android:textAlignment="viewStart" />
+
+                <TextView
+                    android:id="@+id/mountain_location"
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:padding="5dp"
-                android:paddingStart="30dp"
-                android:text="높이 : 1708m"
-                android:textAlignment="viewStart" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/mnt_level"
-                style="@style/CommonText.Black"
+                <TextView
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp"
+                    android:paddingStart="30dp"
+                    android:text="높이 :"
+                    android:textAlignment="viewStart" />
+
+                <TextView
+                    android:id="@+id/mountain_height"
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:padding="5dp"
-                android:paddingStart="30dp"
-                android:text="난이도 : 최상"
-                android:textAlignment="viewStart" />
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp"
+                    android:paddingStart="30dp"
+                    android:text="난이도 :"
+                    android:textAlignment="viewStart" />
+
+                <TextView
+                    android:id="@+id/mountain_level"
+                    style="@style/CommonText.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/mnt_info"
                 style="@style/CommonText.Black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,18 +159,28 @@
                 android:textAlignment="viewStart" />
 
             <TextView
-                android:id="@+id/mnt_info_detail"
+                android:id="@+id/mountain_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:padding="5dp"
                 android:paddingStart="30dp"
-                android:text="대한민국에서 해발 1500m가 넘는 산은 일부 바위로 이루어진 한라산을 제외하고는 죄다 흙으로 이루어진 육산이지만 설악산은 최고봉 대청봉 쪽을 제외하고는 대부분 바위로 이루어져 있고 경사도 몹시 심한 편이다. 그래서 대한민국의 모든 국립공원 중에서 도보산행 난이도가 최상이다."
+                android:text=""
                 android:textAlignment="viewStart"
                 android:textColor="#333232"
                 android:textSize="15dp" />
 
         </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/loadingView"
+        layout="@layout/view_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

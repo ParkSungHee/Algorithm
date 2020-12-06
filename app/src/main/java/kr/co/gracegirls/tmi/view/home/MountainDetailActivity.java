@@ -44,6 +44,7 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
         intent = getIntent();
         data = intent.getParcelableExtra(CommonConfig.ITEM);
+        Log.d("TAG_A", "onCreate: " + data.toString());
 
         init();
         this.InitializeListenerDate();
@@ -75,11 +76,11 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
         // 날짜 초기화
         datePick = findViewById(R.id.choice_day);
-        long start=System.currentTimeMillis();
-        Date date=new Date(start);
-        SimpleDateFormat sdfd=new SimpleDateFormat("yyyy-MM-dd");
-        getDate=sdfd.format(date);
-        datePick.setText("Date: "+getDate);
+        long start = System.currentTimeMillis();
+        Date date = new Date(start);
+        SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd");
+        getDate = sdfd.format(date);
+        datePick.setText("Date: " + getDate);
 
         if (Double.parseDouble(data.getRiskPoint()) <= 75.0) {
             imageView.setImageResource(R.drawable.icon_safe);
@@ -94,11 +95,11 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.choice_day:
-                String[] date=getDate.split("-");
-                String year=date[0];
-                String month=date[1];
-                String day=date[2];
-                DatePickerDialog dialog=new DatePickerDialog(this, callBackMethodDate, Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(day));
+                String[] date = getDate.split("-");
+                String year = date[0];
+                String month = date[1];
+                String day = date[2];
+                DatePickerDialog dialog = new DatePickerDialog(this, callBackMethodDate, Integer.parseInt(year), Integer.parseInt(month) - 1, Integer.parseInt(day));
                 dialog.show();
                 break;
 
@@ -118,10 +119,10 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
     // datedialog에서 선택한 날짜 출력
     public void InitializeListenerDate() {
-        callBackMethodDate=new DatePickerDialog.OnDateSetListener() {
+        callBackMethodDate = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                datePick.setText(String.format("%04d-%02d-%02d", year, month+1, date));
+                datePick.setText(String.format("%04d-%02d-%02d", year, month + 1, date));
             }
         };
     }
@@ -134,6 +135,8 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
     private void startMountainInfoActivity() {
         Intent intent = new Intent(this, MountainInfoActivity.class);
+        intent.putExtra(FirebaseConfig.MOUNTAIN, data);
+        Log.d("TAG_A", "startMountainInfoActivity: " + data.toString());
         startActivity(intent);
     }
 
