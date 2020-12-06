@@ -21,6 +21,7 @@
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="70dp"
         android:text="산명 : "
         app:layout_constraintStart_toStartOf="@id/mountain_image"
@@ -77,7 +78,7 @@
                     android:layout_marginTop="15dp"
                     android:padding="5dp"
                     android:paddingStart="30dp"
-                    android:text="소재지 : "
+                    android:text="소재지 :"
                     android:textAlignment="viewStart" />
 
                 <TextView
@@ -131,7 +132,7 @@
                     android:layout_marginTop="15dp"
                     android:padding="5dp"
                     android:paddingStart="30dp"
-                    android:text="난이도 : "
+                    android:text="난이도 :"
                     android:textAlignment="viewStart" />
 
                 <TextView
