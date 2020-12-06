@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -22,6 +21,7 @@ import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.view.common.CommonConfig;
 import kr.co.gracegirls.tmi.view.home.mountainInfo.MountainInfoActivity;
 import kr.co.gracegirls.tmi.view.home.mountainshelter.MountainShelterActivity;
+import kr.co.gracegirls.tmi.view.home.weatherInfo.WeatherInfoActivity;
 
 public class MountainDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,10 +93,6 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.show_shelter:
-                startMountainShelterListActivity();
-                break;
-
             case R.id.choice_day:
                 String[] date=getDate.split("-");
                 String year=date[0];
@@ -106,11 +102,18 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
                 dialog.show();
                 break;
 
+            case R.id.show_weather:
+                startWeatherInfoActivity();
+                break;
+
             case R.id.show_detail:
                 startMountainInfoActivity();
                 break;
-        }
 
+            case R.id.show_shelter:
+                startMountainShelterListActivity();
+                break;
+        }
     }
 
     // datedialog에서 선택한 날짜 출력
@@ -131,6 +134,12 @@ public class MountainDetailActivity extends AppCompatActivity implements View.On
 
     private void startMountainInfoActivity() {
         Intent intent = new Intent(this, MountainInfoActivity.class);
+        startActivity(intent);
+    }
+
+    private void startWeatherInfoActivity(){
+        Intent intent = new Intent(this, WeatherInfoActivity.class);
+        intent.putExtra("mountainName", data.getName());
         startActivity(intent);
     }
 }

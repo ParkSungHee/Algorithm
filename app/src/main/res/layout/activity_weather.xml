@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".view.home.weatherInfo.WeatherInfoActivity">
+
+    <kr.co.gracegirls.tmi.module.TitleBar
+        android:id="@+id/weather_TitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_5dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_margin_5dp">
+
+        <EditText
+            android:id="@+id/weather_search"
+            android:layout_width="264dp"
+            android:layout_height="wrap_content"
+            android:hint="enter your city name" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="getweather"
+            android:text="get weather"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/common_margin_5dp"
+        android:background="@drawable/background_gray_line_radius_7dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_margin_5dp">
+
+        <TextView
+            android:id="@+id/weather_date_button"
+            android:layout_width="51dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Date" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="#ababab" />
+
+        <TextView
+            android:id="@+id/weather_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="Time" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/weather_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:hint="temperature will"
+        android:textSize="30sp" />
+
+</LinearLayout>
