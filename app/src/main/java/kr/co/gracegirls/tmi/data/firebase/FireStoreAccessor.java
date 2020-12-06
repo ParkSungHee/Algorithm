@@ -2,17 +2,27 @@ package kr.co.gracegirls.tmi.data.firebase;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.data.item.ShelterListItem;
+import kr.co.gracegirls.tmi.data.metadata.SignUpMetaData;
 import kr.co.gracegirls.tmi.view.home.MountainListListener;
 import kr.co.gracegirls.tmi.view.shelter.ShelterListAdapter;
 import kr.co.gracegirls.tmi.view.shelter.ShelterListListener;
@@ -21,6 +31,7 @@ import kr.co.gracegirls.tmi.view.signup.SignUpListener;
 public class FireStoreAccessor {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     public void checkEmailDuplicate(String email, SignUpListener signUpListener) {
         db.collection(FirebaseConfig.USER)
@@ -105,4 +116,46 @@ public class FireStoreAccessor {
                     }
                 });
     }
+
+    public void registerNewUserInAuth(SignUpListener signUpListener, SignUpMetaData data) {
+        data.setPassword(data.getPassword() + "11");
+        firebaseAuth.createUserWithEmailAndPassword(data.getEmail(), data.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    data.setUID(user.getUid());
+                    HashMap<String, Object> inputData = new HashMap<>();
+                    inputData.put(FirebaseConfig.EMAIL, data.getEmail());
+                    inputData.put(FirebaseConfig.NICKNAME, data.getNickname());
+                    inputData.put(FirebaseConfig.UID, data.getUID());
+                    inputData.put(FirebaseConfig.PASSWORD, data.getPassword());
+
+                    db.collection(FirebaseConfig.USER).document(data.getUID()).set(inputData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                signUpListener.checkSignUpIsSuccessful(true);
+                            } else {
+                                signUpListener.checkSignUpIsSuccessful(false);
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            signUpListener.checkSignUpIsSuccessful(false);
+                            Log.e("Error", "Register Failed : ", e);
+                        }
+                    });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Error", "SignUp Failed: ", e);
+                signUpListener.checkSignUpIsSuccessful(false);
+            }
+        });
+    }
+
 }
