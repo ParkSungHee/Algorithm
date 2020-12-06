@@ -66,7 +66,8 @@ public class FireStoreAccessor {
                             String imgPath = String.valueOf(shot.get(FirebaseConfig.IMG_PATH));
                             String riskPoint = String.valueOf(shot.get(FirebaseConfig.RISK_POINT));
                             String height = String.valueOf(shot.get(FirebaseConfig.HEIGHT));
-                            mountainListItems.add(new MountainListItem(documentID, name, location, imgPath, height, riskPoint));
+                            String description =String.valueOf(shot.get(FirebaseConfig.DESCRIPTION));
+                            mountainListItems.add(new MountainListItem(documentID, name, location, imgPath, height, riskPoint, description));
                         }
                         mountainListListener.setMountainList(mountainListItems);
                     }

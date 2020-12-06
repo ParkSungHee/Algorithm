@@ -76,6 +76,7 @@ public class HomeMountainAdapter extends RecyclerView.Adapter<HomeMountainAdapte
                     if (pos != RecyclerView.NO_POSITION) {
                         MountainListItem mountainListItem = mountainList.get(pos);
                         Intent intent = new Intent(context, MountainDetailActivity.class);
+                        Log.d("TAG_A", "onClick: " + mountainListItem.toString());
                         intent.putExtra(CommonConfig.ITEM, mountainListItem);
                         context.startActivity(intent);
                     }
