@@ -1,10 +1,13 @@
 package kr.co.gracegirls.tmi.view.common;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ShelterFragment shelterFragment;
     private MyPageFragment myPageFragment;
     private BottomNavigationView bottomNavigationView;
+    private ConstraintLayout loadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-
+        loadingView = findViewById(R.id.loadingView);
+        loadingView.setVisibility(View.VISIBLE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingView.setVisibility(View.GONE);
+            }
+        }, 1500);
 
         fragmentManager = getSupportFragmentManager();
         homeFragment = new HomeFragment();

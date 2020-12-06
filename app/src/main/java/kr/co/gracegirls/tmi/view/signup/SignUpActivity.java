@@ -194,8 +194,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public boolean checkSignUpIsSuccessful(SignUpMetaData data) {
-                return false;
+            public void checkSignUpIsSuccessful(boolean isSuccessful) {
+                if (isSuccessful) {
+                    signUpDone();
+                } else {
+                    Toast.makeText(context, "회원 가입에 실패 했습니다.\n 다시 시도 부탁드립니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         };
     }
@@ -221,10 +225,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 nickNameUsingThis(false);
                 break;
             case R.id.signUpDoneButton:
-                signUpDone();
+                signUpDoing();
                 break;
         }
 
+    }
+
+    private void signUpDoing() {
+        SignUpMetaData data = new SignUpMetaData(email, nickName, "", password);
+        fireStoreAccessor.registerNewUserInAuth(signUpListener, data);
     }
 
     private void signUpDone() {

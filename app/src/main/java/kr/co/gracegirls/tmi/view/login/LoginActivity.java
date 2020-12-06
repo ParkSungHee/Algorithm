@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.SignInButton;
 
 import kr.co.gracegirls.tmi.R;
+import kr.co.gracegirls.tmi.data.firebase.FireStoreAccessor;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.view.common.MainActivity;
 import kr.co.gracegirls.tmi.view.signup.SignUpActivity;
@@ -26,6 +27,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Context context = this;
 
     EditText emailInput, passwordInput;
+    private String email, password;
+
+    private FireStoreAccessor fireStoreAccessor = new FireStoreAccessor();
+    private LoginActionListener loginActionListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.signUpText).setOnClickListener(this);
 
-        emailInput=findViewById(R.id.emailInput);
-        passwordInput=findViewById(R.id.passwordInput);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
+
+        loginActionListener = new LoginActionListener() {
+            @Override
+            public void login(boolean isSuccessful) {
+                if (isSuccessful) {
+                    Toast.makeText(context, "로그인 성공", Toast.LENGTH_SHORT).show();
+                    startMainActivity();
+                } else {
+                    Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
     }
 
     @Override
@@ -64,13 +81,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.loginButton:
-                Toast.makeText(context, "로그인", Toast.LENGTH_SHORT).show();
-                startMainActivity();
+                attemptLogin();
                 break;
 
             case R.id.signUpText:
                 startSignUpActivity();
                 break;
+        }
+    }
+
+    private void attemptLogin() {
+        email = emailInput.getText().toString();
+        password = passwordInput.getText().toString();
+        if (!email.isEmpty() && !password.isEmpty()) {
+            fireStoreAccessor.loginUser(email, password + "11", loginActionListener);
+        } else {
+            Toast.makeText(context, "이메일과 비밀번호를 바르게 입력해주세요.", Toast.LENGTH_SHORT).show();
         }
     }
 
