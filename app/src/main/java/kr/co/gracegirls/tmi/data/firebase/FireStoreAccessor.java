@@ -24,6 +24,7 @@ import kr.co.gracegirls.tmi.data.item.MountainListItem;
 import kr.co.gracegirls.tmi.data.item.ShelterListItem;
 import kr.co.gracegirls.tmi.data.metadata.SignUpMetaData;
 import kr.co.gracegirls.tmi.view.home.MountainListListener;
+import kr.co.gracegirls.tmi.view.login.LoginActionListener;
 import kr.co.gracegirls.tmi.view.shelter.ShelterListAdapter;
 import kr.co.gracegirls.tmi.view.shelter.ShelterListListener;
 import kr.co.gracegirls.tmi.view.signup.SignUpListener;
@@ -158,4 +159,22 @@ public class FireStoreAccessor {
         });
     }
 
+    public void loginUser(String email, String password, LoginActionListener loginActionListener) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    loginActionListener.login(true);
+                } else {
+                    loginActionListener.login(false);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loginActionListener.login(false);
+                Log.e("Error", "Sign In Failed : ", e);
+            }
+        });
+    }
 }
