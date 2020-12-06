@@ -54,6 +54,21 @@ public class WeatherInfoActivity extends AppCompatActivity {
 
         init();
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void init() {
+        weather_search.setText(data);
+
+        TitleBar titleBar = findViewById(R.id.weather_TitleBar);
+        titleBar.init("날씨", true);
+        titleBar.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         // 날짜, 시간 초기화
         datePick = this.findViewById(R.id.weather_date_button);
         timePick = this.findViewById(R.id.weather_time_button);
@@ -61,10 +76,10 @@ public class WeatherInfoActivity extends AppCompatActivity {
         // 현재 날짜, 시각
         long start=System.currentTimeMillis();
         Date date=new Date(start);
-        SimpleDateFormat sdfd=new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdft=new SimpleDateFormat("kk:mm");
-        String getDate=sdfd.format(date);
-        String getTime=sdft.format(date);
+        SimpleDateFormat simple_date=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simple_time=new SimpleDateFormat("kk:mm");
+        String getDate=simple_date.format(date);
+        String getTime=simple_time.format(date);
         datePick.setText("Date: "+getDate);
         timePick.setText("Time: "+getTime);
 
@@ -95,20 +110,6 @@ public class WeatherInfoActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
-    }
-    @SuppressLint("SetTextI18n")
-    private void init() {
-        weather_search.setText(data);
-
-        TitleBar titleBar = findViewById(R.id.weather_TitleBar);
-        titleBar.init("날씨", true);
-        titleBar.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
     }
 
     public void getweather(View v) {
@@ -125,9 +126,6 @@ public class WeatherInfoActivity extends AppCompatActivity {
             public void onResponse(Call<WeatherInfo> call, Response<WeatherInfo> response) {
                 if (response.code() == 404) {
                     Toast.makeText(WeatherInfoActivity.this, "도시 입력해주세요", Toast.LENGTH_LONG).show();
-                }
-                else if (!(response.isSuccessful())) {
-                    Toast.makeText(WeatherInfoActivity.this, response.code(), Toast.LENGTH_LONG).show();
                 }
                 WeatherInfo mydata = response.body();
                 Main main = mydata.getMain();

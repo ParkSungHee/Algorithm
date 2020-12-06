@@ -125,7 +125,7 @@ public class ShelterFragment extends Fragment implements OnMapReadyCallback {
                         googleMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "권한이 없습니다.\n설정 -> 권한 설정을 해주세요.", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
