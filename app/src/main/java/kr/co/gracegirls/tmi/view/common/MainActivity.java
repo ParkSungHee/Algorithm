@@ -14,6 +14,7 @@ import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.view.home.HomeFragment;
 import kr.co.gracegirls.tmi.view.mypage.MyPageFragment;
 import kr.co.gracegirls.tmi.view.record.RecordFragment;
+import kr.co.gracegirls.tmi.view.record.RecordSanstagram;
 import kr.co.gracegirls.tmi.view.shelter.ShelterFragment;
 import kr.co.gracegirls.tmi.view.sos.SosFragment;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ShelterFragment shelterFragment;
     private MyPageFragment myPageFragment;
     private BottomNavigationView bottomNavigationView;
+    private RecordSanstagram recordSanstagram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

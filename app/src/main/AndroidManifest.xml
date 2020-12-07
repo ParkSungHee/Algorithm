@@ -20,7 +20,9 @@
         <activity android:name=".view.signup.SignUpDoneActivity" />
         <activity android:name=".view.signup.SignUpActivity" />
         <activity android:name=".view.login.LoginActivity" />
-
+        <activity android:name=".view.record.SaveRecordActivity"/>
+        <activity android:name=".view.record.RecordSanstagram"/>
+        <activity android:name=".view.record.RecordTrack"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

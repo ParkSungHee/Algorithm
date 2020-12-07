@@ -1,6 +1,7 @@
 package kr.co.gracegirls.tmi.view.record;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -19,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +28,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -55,6 +57,7 @@ import android.hardware.SensorEvent;
 import kr.co.gracegirls.tmi.R;
 import kr.co.gracegirls.tmi.module.TitleBar;
 import kr.co.gracegirls.tmi.util.PermissionUtils;
+import kr.co.gracegirls.tmi.view.common.MainActivity;
 
 
 public class RecordFragment extends Fragment implements OnMapReadyCallback,
@@ -65,7 +68,12 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap googleMap;
     private GpsTracker gpsTracker;
     private Polyline polylines;
+    //세희
+    MainActivity activity;
+    FragmentManager manager;
+    private SaveRecordActivity saveRecord;
 
+    //
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private GoogleApiClient googleApiClient;
@@ -84,6 +92,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
     int cur_Status = Init; // 현재의 상태를 저장할변수를 초기화함.
     ImageButton myBtnStart; // 시작 버튼
+    ImageButton myBtnSave;//저장버튼
 
     // 처음 버튼 선택 시 시 가져오기 위한 변수
     TextView myStart;
@@ -142,6 +151,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
         // 카운터 체크용
         myTime = view.findViewById(R.id.time_out);
         myBtnStart = view.findViewById(R.id.btn_start);
+        myBtnSave=view.findViewById(R.id.btn_save);
 
         // 거리 체크용
         myDistance=view.findViewById(R.id.killo_distance);
@@ -205,9 +215,35 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                                 break;
                         }
                         break;
+                    case R.id.btn_save:
+                        Log.e("save", "save");
+//                        manager = getFragmentManager();
+//                        manager.beginTransaction().replace(R.id.frameLayout, saveRecord);
+                        startSaveRecordActivity();
+
+                        break;
+
                 }
             }
         });
+
+        myBtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(v.getId()){
+
+                    case R.id.btn_save:
+                        Log.e("save", "save");
+//                        manager = getFragmentManager();
+//                        manager.beginTransaction().replace(R.id.frameLayout, saveRecord);
+                        startSaveRecordActivity();
+
+                        break;
+
+                }
+            }
+        });
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.record_map);
@@ -225,6 +261,13 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
         return view;
     }
+    private void startSaveRecordActivity() {
+
+        Intent intent = new Intent(getActivity(), SaveRecordActivity.class);
+        startActivity(intent);
+        //finish();
+    }
+
     private void changeWalkState(){
         if(!walkState) {
             gpsTracker = new GpsTracker(getActivity());

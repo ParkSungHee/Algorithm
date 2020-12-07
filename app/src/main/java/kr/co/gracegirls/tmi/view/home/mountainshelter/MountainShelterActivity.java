@@ -33,8 +33,8 @@ public class MountainShelterActivity extends AppCompatActivity {
     private String mountainId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mountain_shelter);
 
         TitleBar titleBar = findViewById(R.id.mountain_shelter_title);

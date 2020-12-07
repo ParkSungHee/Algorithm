@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".view.login.LoginActivity">
+
+        <kr.co.gracegirls.tmi.module.TitleBar
+            android:id="@+id/uploadTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/record_title"
+            android:layout_width="152dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10sp"
+            android:text="기록 제목"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/uploadTitleBar"
+            app:layout_constraintTop_toBottomOf="@+id/uploadTitleBar" />
+
+
+        <EditText
+            android:id="@+id/titleInput"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="@null"
+            android:hint="제목 입력,,,"
+            app:layout_constraintStart_toStartOf="@id/user_image"
+            app:layout_constraintTop_toBottomOf="@+id/record_title"
+            tools:ignore="Autofill,LabelFor" />
+
+        <View
+            android:id="@+id/title_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/common_margin_10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/titleInput"
+            app:layout_constraintTop_toBottomOf="@id/titleInput" />
+
+        <TextView
+            android:id="@+id/context_title"
+            android:layout_width="152dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10sp"
+            android:text="문구 입력"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleInput" />
+
+
+        <EditText
+            android:id="@+id/contextInput"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="문구 입력,,,"
+            app:layout_constraintTop_toBottomOf="@+id/context_title"
+            app:layout_constraintStart_toStartOf="@id/user_image"
+
+            tools:ignore="Autofill,LabelFor" />
+
+        <View
+            android:id="@+id/context_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/common_margin_10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/contextInput"
+            app:layout_constraintTop_toBottomOf="@id/contextInput" />
+
+
+        <TextView
+            android:id="@+id/upload_img"
+            android:layout_width="152dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="10sp"
+            android:text="기록 사진"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/context_view" />
+
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
+            android:onClick="onClick"
+            android:src="@drawable/upload"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upload_img" />
+
+        <Button
+            android:id="@+id/upload_btn"
+            android:layout_width="337dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_green_fill_radius_10dp"
+            android:text="게시"
+            android:textColor="@color/logo"
+            android:textSize="30dp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

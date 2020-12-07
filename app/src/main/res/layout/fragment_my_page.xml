@@ -23,7 +23,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="@dimen/common_margin_20dp"
-        android:src="@drawable/icon_tmp_person"
+        android:src="@drawable/sehee"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mypage_title_bar"
         tools:ignore="ContentDescription" />
@@ -32,8 +32,9 @@
         style="@style/CommonText.Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="사용자이름\n(뱃지명)(뱃지사진)"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="28dp"
+        android:text="권세희"
         android:textAlignment="viewStart"
         android:textSize="@dimen/common_margin_20dp"
         app:layout_constraintStart_toEndOf="@id/tmp_profile"
@@ -64,28 +65,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0.00Km\n거리" />
+            android:text="0.49Km\n거리" />
 
         <TextView
             style="@style/CommonText.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="00:00\n시간" />
+            android:text="00:06:26\n시간" />
 
         <TextView
             style="@style/CommonText.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0000\n걸음" />
+            android:text="744\n걸음" />
 
         <TextView
             style="@style/CommonText.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0000\n횟수" />
+            android:text="1\n횟수" />
 
     </LinearLayout>
 
@@ -159,7 +160,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/background_gray_line_radius_7dp"
             android:padding="10dp"
-            android:text="앱 설정\n알림 설정\n공지사항\n문의사항"
+            android:text="앱 설정\n공지사항\n문의사항"
             android:textAlignment="viewStart"
             android:textSize="14dp" />
     </LinearLayout>
