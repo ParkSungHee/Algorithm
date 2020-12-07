@@ -97,7 +97,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        //TODO - 동적으로 바꾸어야함
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.441706637533, 126.66733865898013)));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));

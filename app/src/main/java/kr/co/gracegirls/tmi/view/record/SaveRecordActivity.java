@@ -1,29 +1,16 @@
 package kr.co.gracegirls.tmi.view.record;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import kr.co.gracegirls.tmi.R;
-import kr.co.gracegirls.tmi.data.firebase.FirebaseConfig;
-import kr.co.gracegirls.tmi.view.common.CommonConfig;
-import kr.co.gracegirls.tmi.view.common.MainActivity;
-import kr.co.gracegirls.tmi.view.home.mountainshelter.MountainShelterActivity;
-import kr.co.gracegirls.tmi.view.mypage.MyPageFragment;
-import kr.co.gracegirls.tmi.view.record.RecordSanstagram;
 
 
 public class SaveRecordActivity extends AppCompatActivity {
@@ -34,7 +21,7 @@ public class SaveRecordActivity extends AppCompatActivity {
     private Button uploadBtn;
 
     private FragmentManager fragmentManager;
-    private RecordSanstagram mySanstagramFragment;
+    private RecordSanstagramActivity mySanstagramFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +37,7 @@ public class SaveRecordActivity extends AppCompatActivity {
         });
 
         fragmentManager = getSupportFragmentManager();
-        uploadBtn=(Button) findViewById(R.id.upload_btn);
+        uploadBtn=findViewById(R.id.upload_btn);
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,8 +51,8 @@ public class SaveRecordActivity extends AppCompatActivity {
 
     }
     private void moveSanstagram() {
-        Intent intent = new Intent(this, RecordSanstagram.class);
-//        intent.putExtra(FirebaseConfig.MOUNTAIN_ID, data.getDocumentID());
+        Intent intent = new Intent(this, RecordSanstagramActivity.class);
+        //recordSanstagramActivity시작
         startActivity(intent);
     }
     @Override

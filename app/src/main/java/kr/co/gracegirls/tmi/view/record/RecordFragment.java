@@ -216,9 +216,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
                         }
                         break;
                     case R.id.btn_save:
-                        Log.e("save", "save");
-//                        manager = getFragmentManager();
-//                        manager.beginTransaction().replace(R.id.frameLayout, saveRecord);
+                        Log.d("save", "save");
                         startSaveRecordActivity();
 
                         break;
@@ -234,8 +232,6 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
                     case R.id.btn_save:
                         Log.e("save", "save");
-//                        manager = getFragmentManager();
-//                        manager.beginTransaction().replace(R.id.frameLayout, saveRecord);
                         startSaveRecordActivity();
 
                         break;
@@ -265,8 +261,7 @@ public class RecordFragment extends Fragment implements OnMapReadyCallback,
 
         Intent intent = new Intent(getActivity(), SaveRecordActivity.class);
         startActivity(intent);
-        //finish();
-    }
+     }
 
     private void changeWalkState(){
         if(!walkState) {
