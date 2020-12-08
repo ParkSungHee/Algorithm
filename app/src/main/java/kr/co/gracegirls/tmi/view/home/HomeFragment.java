@@ -216,7 +216,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        //TODO - 동적으로 바꾸어야함
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.441706637533, 126.66733865898013)));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
         LatLng seunghack = new LatLng(37.44237920148298, 126.68814372688384);
 
@@ -233,9 +235,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         googleMap.addMarker(seunghackMarker);
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(seunghack));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
+    
         LatLng munhack = new LatLng(37.43297284354754, 126.67936844300222);
 
         MarkerOptions munhackMarker = new MarkerOptions();
@@ -356,9 +356,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         googleMap.addMarker(hanraMarker);
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.44184293474863, 126.66703827786698)));
-       // googleMap.moveCamera(CameraUpdateFactory.newLatLng(hanra));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
 
 

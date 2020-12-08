@@ -21,6 +21,9 @@
         <activity android:name=".view.signup.SignUpDoneActivity" />
         <activity android:name=".view.signup.SignUpActivity" />
         <activity android:name=".view.login.LoginActivity" />
+        <activity android:name=".view.record.SaveRecordActivity"/>
+        <activity android:name=".view.record.RecordSanstagramActivity"/>
+        <activity android:name=".view.record.RecordTrackActivity"/>
         <activity android:name=".view.home.mountainInfo.MountainInfoActivity" />
         <activity android:name=".view.home.weatherInfo.WeatherInfoActivity"/>
 
