@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\1018_체스판다시칠하기.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\1260_DFS와 BFS.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="2667_단지번호붙이기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -72,9 +66,6 @@
     <ClCompile Include="14503_로봇 청소기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="연습.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="10972_다음 순열.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -85,6 +76,33 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="15650_n과 m.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15655_n과 m.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15683_감시.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="9663_N-Queen.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1260_dfs와 bfs.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1018_체스판다시칠하기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15649_n과 m%28백트래킹%29.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15686_치킨배달.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14499_주사위 굴리기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
