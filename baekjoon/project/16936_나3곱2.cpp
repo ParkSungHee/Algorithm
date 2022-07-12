@@ -3,31 +3,52 @@
 using namespace std;
 
 int main() {
-    long long result = 0; //시험장개수*응시자수 최댓값이 1,000,000 * 1,000,000 int벗어남
-    int testRoom, b, c, num;
-    vector<int> testNum;
+    int n;
+    long long num;
+    vector<long long> v;
 
-    cin >> testRoom;
-    while (testRoom--) {
+    cin >> n;
+    for (int i = 0; i < n; i++) {
         cin >> num;
-        testNum.push_back(num);
+        v.push_back(num);
     }
-    cin >> b >> c;
 
-    for (auto tester: testNum) {
-        tester -= b;
+    for (int i = 0; i < n; i++) {
+        vector<long long> vec;
+        vec.push_back(v[i]);
 
-        if (tester <= 0) {
-            result++;
-        } else {
-            result++;
-            if (tester % c == 0) { //딱 떨어질 때
-                result += (tester / c);
-            } else {
-                result += (tester / c) + 1;
+        while (vec.size() < n) {
+            bool isFlag = false; //vec에 넣은 게 있는지
+
+            // 2 곱하기
+            for (int j = 0; j < n; j++) {
+                if ((vec.back() * 2) == v[j]) {
+                    vec.push_back(v[j]);
+                    isFlag = true;
+                    break;
+                }
+            }
+            // 3 나누기
+            if (!(vec.back() % 3)) {
+                for (int j = 0; j < n; j++) {
+                    if ((vec.back() / 3) == v[j]) {
+                        vec.push_back(v[j]);
+                        isFlag = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!isFlag) {
+                break;
             }
         }
+        if (vec.size() == n) {
+            for (auto vv: vec) {
+                cout << vv << " ";
+            }
+            break;
+        }
     }
-    cout << result;
     return 0;
 }
