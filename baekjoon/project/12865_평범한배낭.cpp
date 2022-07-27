@@ -2,26 +2,31 @@
 #include<algorithm>
 using namespace std;
 
-int n;
-int dp[100001];  //점수의 합
-int score[100001]; //점수
+
+int n, k;
+int dp[101][100001];
+int w[102], v[102];
+
 
 int main() {
-    cin >> n;
+    cin >> n >> k;
 
-    for (int i = 0; i < n; i++) {
-        cin >> score[i];
+    for (int i = 1; i <= n; i++) {
+        cin >> w[i] >> v[i];
+    }
+    for (int i = 1; i <= n; i++) { // 물건 번호
+        for (int j = 1; j <= k; j++) { // 무게
+            if (w[i] > j) {
+                dp[i][j] = dp[i - 1][j];
+            } else {
+                int v1 = dp[i - 1][j];
+                int v2 = dp[i - 1][j - w[i]] + v[i];
+
+                dp[i][j] = max(v1, v2);
+            }
+        }
     }
 
-    dp[0] = score[0];
-    dp[1] = score[0] + score[1];
-    dp[2] = max(score[0], score[1]) + score[2];
-
-    for (int i = 3; i < n; i++) { // -3 이라서
-        //dp[i-2]에서 점프한 경우 vs dp[i-3]에서 두칸 점프해서 i-1번째를 밟고 i번째를 밟은 경우
-        dp[i] = max(dp[i - 2] + score[i], dp[i - 3] + score[i - 1] + score[i]);
-    }
-
-    cout << dp[n - 1];
+    cout << dp[n][k];
     return 0;
 }
