@@ -51,7 +51,6 @@ void BFS(int V) {
 				visit[i] = 1;
 			}
 		}
-
 	}
 }
 
@@ -64,9 +63,9 @@ int main() {
 		cin >> x >> y;
 		graph[x][y] = graph[y][x] = 1;	//인접행렬표시
 	}
-	DFS(V);
-	memset(visit, 0, sizeof(visit));
-	cout << endl;
+	//DFS(V);
+	//memset(visit, 0, sizeof(visit));
+	//cout << endl;
 	BFS(V);
 	return 0;
 }
