@@ -5,8 +5,9 @@
 
 using namespace std;
 
-int date[12] = { 3, 1, 3, 2, 3, 2, 3, 3, 2, 3, 2, 3 };
-string day[7] = { "THU","FRI","SAT","SUN","MON","TUE","WED" };
+//31,29,31,30,31,30,31,31,30,31,30,31
+int date[12] = { 3, 1, 3, 2, 3, 2, 3, 3, 2, 3, 2, 3 }; //%7 한 배열
+string day[7] = { "THU","FRI","SAT","SUN","MON","TUE","WED" }; //1일이 금요일
 
 string solution(int a, int b) {
 	string answer = ""; //요일
