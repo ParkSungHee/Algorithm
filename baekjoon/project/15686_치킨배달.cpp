@@ -1,23 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
-#include <iostream>
+#include <cmath>
 using namespace std;
 
 int map[60][60];
-int N, M;
+int n, m;
 int minimum = 10000000;
 vector<pair<int, int>> chicken;
 vector<pair<int, int>> house;
 vector<pair<int, int>> choice;
 
-int check(pair<int, int> house, vector<pair<int, int>> choice){
+//0 : 빈칸, 1: 집, 2: 치킨집
+
+int check(pair<int, int> h, vector<pair<int, int>> c) { //house, choice
     int min = 10000000;
 
-    for (int i = 0; i < choice.size(); i++){
-        int value = abs(house.first - choice[i].first) + abs(house.second - choice[i].second);
+    for (auto &i: c) {
+        int value = abs(h.first - i.first) + abs(h.second - i.second);
 
-        if (value < min){
+        if (value < min) {
             min = value;
         }
     }
@@ -25,40 +26,45 @@ int check(pair<int, int> house, vector<pair<int, int>> choice){
     return min;
 }
 
-void backtracking(int idx, int cnt){
-    if (cnt == M){
+void backtracking(int idx, int cnt) { // idx : 치킨집 조합을 위함, cnt : 치킨집 카운트
+    cout << "idx: " << idx << ", cnt: " << cnt << endl;
+    if (cnt == m) {
         int sum = 0;
 
-        for (int i = 0; i < house.size(); i++){
-            sum += check(house[i], choice);
+        for (auto &i: house) {
+            cout << "check(i, choice) " << check(i, choice) << endl;
+            sum += check(i, choice);
         }
 
-        if (sum < minimum){
+        if (sum < minimum) {
             minimum = sum;
         }
 
         return;
     }
 
-    for (int i = idx; i < chicken.size(); i++){
-        choice.push_back({ chicken[i].first, chicken[i].second });
+    //전체 치킨집 중에서 m개 골라서(조합) 집과의 치킨거리 다 비교하기 (n과 m)
+    for (int i = idx; i < chicken.size(); i++) { // i = idx !
+        cout << "(1) i: " << i << ", cnt: " << cnt << endl;
+        choice.emplace_back(chicken[i].first, chicken[i].second);
         backtracking(i + 1, cnt + 1);
         choice.pop_back();
+        cout << "size: " << choice.size() << endl;
+        cout << "(2) i: " << i << ", cnt: " << cnt << endl;
     }
 }
 
-int main(void){
-    cin >> N >> M;
+int main() {
+    cin >> n >> m;
 
-    for (int i = 0; i < N; i++){
-        for (int j = 0; j < N; j++){
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             cin >> map[i][j];
 
-            if (map[i][j] == 1){
-                house.push_back({ i, j });
-            }
-            else if (map[i][j] == 2){
-                chicken.push_back({ i, j });
+            if (map[i][j] == 1) {
+                house.emplace_back(i, j);
+            } else if (map[i][j] == 2) {
+                chicken.emplace_back(i, j);
             }
         }
     }
