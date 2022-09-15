@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(int bridge_length, int weight, vector<int> truck_weights) {
+    int answer = 0;
+    int sum = 0, idx = 0;
+    queue<int> q;
+
+    while (true) {
+        if (idx == truck_weights.size()) {
+            answer += bridge_length;
+            break;
+        }
+        answer++;
+        int tmp = truck_weights[idx];
+
+        if (q.size() == bridge_length) {
+            sum -= q.front();
+            q.pop();
+        }
+
+        if (sum + tmp <= weight) {//¹«°Ô
+            q.push(tmp);
+            sum += tmp;
+            idx++;
+        } else {
+            q.push(0);
+        }
+
+    }
+    return answer;
+}
