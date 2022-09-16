@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int solution(vector<vector<int>> sizes) {
+int solution(vector<vector<int>> sizes) { //작은건 세로에, 작은건 가로에 넣어서 최댓값 구하면 됨
     int answer;
     vector<int> max_v, min_v;
 
