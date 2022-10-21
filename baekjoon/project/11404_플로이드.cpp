@@ -26,12 +26,14 @@ int main() {
         }
     }
 
-    for (int k = 1; k <= n; k++) {
+    for (int k = 1; k <= n; k++) { //거쳐가는게 중심
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 if (dist[i][k] == INF || dist[k][j] == INF) {
                     continue;
                 }
+
+                // i에서 k로 가는비용 + k에서 j로 가는비용 vs i에서 j로 가는 비용
                 if (dist[i][k] + dist[k][j] < dist[i][j]) {
                     dist[i][j] = dist[i][k] + dist[k][j];
                 }
@@ -52,3 +54,17 @@ int main() {
 
     return 0;
 }
+//4 7
+//1 2 4
+//1 4 6
+//2 1 3
+//2 3 7
+//3 1 5
+//3 4 4
+//4 3 2
+
+//결과
+//0 4 8 6
+//3 0 7 9
+//5 9 0 4
+//7 11 2 0
