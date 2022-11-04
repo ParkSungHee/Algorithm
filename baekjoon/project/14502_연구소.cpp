@@ -1,113 +1,84 @@
 #include <iostream>
 #include <vector>
-#include <queue>
-#include <cstring>
-
-#define max 10
 using namespace std;
 
-int N, M, result = 0;
-int map[max][max];
-int temp[max][max];
-int visit[max][max] = { 0, };
+#define MAX 11
+int arr[MAX][MAX];
+int tmp[MAX][MAX];
+int n, m;
+int dx[4] = {-1, 1, 0, 0};
+int dy[4] = {0, 0, -1, 1};
+int result = 0;
 
-void ary_cp(void) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            temp[i][j] = map[i][j];
+void virus(int x, int y) { //dfs
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (nx < 0 || nx > n || ny < 0 || ny > m)
+            continue;
+        if (tmp[nx][ny] == 0) {
+            tmp[nx][ny] = 2;
+            virus(nx, ny);
         }
     }
 }
-bool ck(int y, int x) {
-    if (y<0 || x<0 || y>N || x>M) { return false; }
-    else if (temp[y][x] == 1 || temp[y][x] == 2 || temp[y][x] == 9 || temp[y][x] == 3) { 
-        return false; 
-    }
-    else if (temp[y][x] == 0) { return true; }
-}
-void bfs() {
-    queue<int> dx;
-    queue<int> dy;
-    int x, y;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            if (temp[i][j] == 2) {
-                dy.push(i);
-                dx.push(j);
-            }
-        }
-    }
-    while (!dx.empty()) {
-        x = dx.front();
-        y = dy.front();
-        dy.pop();
-        dx.pop();
-        temp[y][x] = 2;
-        //상
-        if (ck(y - 1, x) == true) {
-            dx.push(x);
-            dy.push(y - 1);
-        }
-        //하
-        if (ck(y + 1, x) == true) {
-            dx.push(x);
-            dy.push(y + 1);
-        }
-        //좌
-        if (ck(y, x - 1) == true) {
-            dx.push(x - 1);
-            dy.push(y);
-        }
-        //우
-        if (ck(y, x + 1) == true) {
-            dx.push(x + 1);
-            dy.push(y);
-        }
-    }
+
+int getScore() {
     int cnt = 0;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            if (temp[i][j] == 0) { cnt++; }
-        }
-    }
-    if (cnt >= result) { result = cnt; }
-}
-void wall(int cnt) {
-    if (cnt == 3) { //벽을 3개 세울시 bfs실행
-        bfs();
-        ary_cp();
-    }
-    else { // 3개가 될 때 까지 재귀를 돌려준다.
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                if (map[i][j] == 0) {
-                    map[i][j] = 1;
-                    wall(cnt + 1);
-                    map[i][j] = 0;
-                }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (tmp[i][j] == 0) {
+                cnt++;
             }
         }
+    }
+    return cnt;
+}
+
+void dfs(int cnt) { //dfs로 벽 설치
+    if (cnt == 3) {
+        //바이러스 퍼뜨리기
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                tmp[i][j] = arr[i][j];
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (tmp[i][j] == 2)
+                    virus(i, j);
+            }
+        }
+
+        //안전영역 최대인 것으로 교체
+        result = max(result, getScore());
+        return;
     }
 
-}
-int main(void) {
-    cin >> N >> M;
-    //테이터 입력 받음
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> map[i][j];
-            temp[i][j] = map[i][j];
-        }
-    }
-    // 벽을 세우기 위해 재귀를 이용함
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            if (map[i][j] == 0) {
-                map[i][j] = 1;
-                wall(1);
-                map[i][j] = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (arr[i][j] == 0) {
+                arr[i][j] = 1;
+                cnt++;
+                dfs(cnt);
+                arr[i][j] = 0;
+                cnt--;
             }
         }
     }
+}
+
+int main() {
+    cin >> n >> m;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> arr[i][j];
+        }
+    }
+    dfs(0);
     cout << result;
+    return 0;
 }
